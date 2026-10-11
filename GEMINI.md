@@ -1,6 +1,6 @@
 # 🚀 Vibe Coding Showcase & Google OAuth Compliance Landing
 
-> **아무거나 Studio**에서 제작한 바이브코딩 PWA 웹 애플리케이션 제품군을 소개하고, Google OAuth 배포 검수를 충족하기 위한 **통합 개인정보처리방침** 및 **구글 계정 본인 인증 기반 데이터 삭제 파이프라인**을 제공하는 공식 랜딩 페이지입니다.
+> **아무거나 Studio**에서 제작한 바이브코딩 PWA 웹 애플리케이션 제품군을 소개하고, Google OAuth 배포 검수를 충족하기 위한 **통합 개인정보처리방침** 및 **구글 계정 본인 인증 기반 데이터 사전 조회 / 삭제 / 익명화 파이프라인**을 제공하는 공식 랜딩 페이지입니다.
 
 ---
 
@@ -12,7 +12,7 @@
 - **핵심 목적**:
   1. 바이브코딩으로 제작된 6가지 실용 웹 애플리케이션 쇼케이스 제공.
   2. Google API 서비스 사용자 데이터 정책(Google API Services User Data Policy)을 엄격히 준수하는 **통합 개인정보처리방침** 공시.
-  3. 구글 OAuth 검수 통과를 위한 **본인 확인 기반 계정 및 이용 데이터 즉시 영구 삭제 기능** 지원.
+  3. 구글 OAuth 검수 통과를 위한 **본인 확인 기반 계정 및 이용 데이터 실시간 사전 조회 및 영구 삭제/익명화 기능** 지원.
 
 ---
 
@@ -23,11 +23,12 @@
 | **Framework** | **Next.js (App Router)** | v16+ (Turbopack 탑재) |
 | **Core** | **React** | v19.3.0 |
 | **Language** | **TypeScript** | v5.x (Strict Type Checking) |
-| **Styling** | **Tailwind CSS** | v4 (`@tailwindcss/typography` 플러그인 내장) |
+| **Styling** | **Tailwind CSS** | v4 (`@tailwindcss/typography` 내장) |
 | **Icons** | **Lucide Icons** | 최신 SVG 벡터 아이콘 세트 |
-| **Authentication** | **NextAuth.js v5 Beta** | `auth.js` (Google OAuth Provider, 최소 스코프) |
-| **Animation** | **framer-motion** | v12+ (카드 호버, 아코디언, 모달 애니메이션) |
-| **Markdown** | **react-markdown** | 개인정보처리방침 원문 동적 파싱 및 가독성 렌더링 |
+| **Authentication** | **NextAuth.js v5 Beta** | `auth.js` (Google OAuth Provider, 최소 스코프 `openid email profile`) |
+| **Database Client**| **@supabase/supabase-js** | 개인정보 실시간 사전 조회 및 삭제/익명화 연동 |
+| **Animation** | **framer-motion** | v14+ (카드 호버, 아코디언, 모달 트랜지션) |
+| **Markdown** | **react-markdown** & **remark-gfm** | GFM 마크다운 표(Table) 파싱 및 고대비 다크모드 가독성 최적화 |
 
 ---
 
@@ -49,24 +50,48 @@
 
 - 모든 카드는 `framer-motion` 호버 인터랙션과 함께 새 탭(`target="_blank" rel="noopener noreferrer"`)으로 안전하게 연결됩니다.
 
-### 3.3. 개인정보처리방침 동적 마크다운 렌더링 (`/privacy`)
-- `content/privacy-policy.md` 파일을 서버 컴포넌트(`app/privacy/page.tsx`)에서 Node.js `fs.readFileSync`로 직접 읽어와 렌더링합니다.
-- `@tailwindcss/typography`의 `prose prose-indigo dark:prose-invert max-w-none` 클래스를 적용하여 데스크톱 및 모바일에서 최적의 가독성을 제공합니다.
-- 마크다운 원본 문서를 수정하면 코드 수정 없이 즉시 페이지에 반영됩니다.
+### 3.3. 개인정보처리방침 동적 마크다운 및 표(Table) 고대비 렌더링 (`/privacy`)
+- `content/privacy-policy.md` 파일을 서버 컴포넌트(`app/privacy/page.tsx`)에서 Node.js `fs.readFileSync`로 읽어와 렌더링.
+- **GFM 표(Table) 완벽 파싱**: `remark-gfm` 플러그인을 탑재하여 제3자 제공 위탁 현황 표를 모바일 반응형 가로 스크롤 카드(`overflow-x-auto rounded-xl`)로 렌더링.
+- **다크 모드 가독성 최적화**: 
+  - 본문 굵은 글씨(`strong`): 선명한 순백색(`text-white font-bold`)
+  - 일반 본문/목록(`p`, `li`): 고명도 슬레이트(`text-slate-200`)
+  - 인라인 코드 토큰: 딥 네이비 배경에 라벤더 인디고(`text-[#c3c0ff]`)
+- 원본 마크다운 문서를 수정하면 코드 수정 없이 즉시 페이지에 반영됩니다.
 
-### 3.4. 구글 로그인 기반 계정 데이터 삭제 파이프라인
-구글 개발자 검수(Verification)를 완벽히 통과하기 위한 3단계 UX 파이프라인을 지원합니다:
-1. **모달 진입**: 상단 헤더, 메인 섹션, 푸터의 [데이터 삭제 요청] 버튼을 누르면 `DeleteDataModal` 실행.
-2. **비로그인 상태 (1단계)**:
-   - "타인의 악의적인 데이터 삭제를 방지하기 위해 구글 계정 본인 인증이 필요합니다." 안내 표시.
-   - 구글 검수 최소 권한(`openid email profile`)만을 요청하는 Google 로그인 트리거 (`signIn('google')`).
-3. **로그인 완료 상태 (2단계)**:
-   - 인증된 사용자 정보(이메일, 프로필 사진, 본인 인증 뱃지) 명시.
-   - 경고 문구: *"본 작업을 진행하면 Supabase 및 연동된 모든 앱의 학습 기록, 메모, 설정 데이터가 영구적으로 파기됩니다."*
-   - [모든 데이터 영구 삭제] 버튼 클릭 시 `/api/account/delete`로 POST 요청 전송.
-4. **삭제 완료 (3단계)**:
-   - 200 OK 응답 수신 후 구글 세션을 자동 로그아웃(`signOut()`) 처리.
-   - 사용자에게 영구 파기 완료 화면을 안내.
+### 3.4. 구글 로그인 기반 개인정보 사전 조회 & 데이터 삭제 파이프라인
+구글 개발자 검수(Verification)를 완벽히 통과하기 위한 다단계 UX 파이프라인을 지원합니다:
+
+```mermaid
+flowchart TD
+    A["[데이터 삭제 요청] 버튼 클릭"] --> B{"구글 로그인 여부"}
+    B -- "비로그인 (1단계)" --> C["본인 인증 안내 & signIn('google')"]
+    C --> D["구글 공식 로그인 성공"]
+    B -- "로그인 상태 (2단계)" --> E["서버 측 세션 검증 (await auth)"]
+    D --> E
+    E --> F["POST /api/account/summary 호출"]
+    F --> G["Supabase 4개 테이블 실시간 보유 현황 렌더링"]
+    G --> H["[모든 데이터 영구 삭제] 클릭"]
+    H --> I["POST /api/account/delete 호출"]
+    I --> J["자동 signOut 및 최종 완료 화면 (3단계)"]
+```
+
+1. **엄격한 서버 측 보안 (Zero-Trust)**:
+   - 클라이언트에서 전달하는 파라미터는 일체 신뢰하지 않으며, **오직 서버 세션(`await auth()`)에서 검증된 `session.user.email`만을 고정 식별자로 사용**하여 타인 데이터 조회 및 훼손을 원천 차단.
+2. **실시간 개인정보 사전 조회 (`POST /api/account/summary`)**:
+   - **이북 리더기 (Simple Reader)**: `pdf_metadata` 테이블 (`user_id = userEmail`) → 메모 개수, 북마크 개수 및 총 건수 집계.
+   - **단어장 앱 (Word Smart)**: `study_history` 테이블 (`user_email = userEmail`) → 학습/테스트 기록 건수 집계.
+   - **스케줄 앱 (Simple Schedule)**: `user_notion_tokens` 테이블 (`user_email = userEmail`) → 노션 연동 토큰 저장 여부.
+   - **단어장 목록**: `word_lists` 테이블 (`user_email = userEmail`) → 보유 단어장 개수 및 제목(Title) 목록 표시.
+3. **데이터 삭제 및 익명화 파이프라인 (`POST /api/account/delete`)**:
+   - `pdf_metadata`, `study_history`, `user_notion_tokens`: 물리적 영구 삭제 (`delete`)
+   - `word_lists`: 공유 단어장 생태계 보존을 위해 작성자 식별자를 `'anonymous'`로 마스킹 익명화 (`update`)
+   - **[안전 조치 - 현재 상태]**: 실제 운영 환경에서의 오작동 방지 및 안전한 테스트를 위해, **실제 DB 쿼리 실행부는 임시 주석(`/* ... */`) 처리되어 Mock 응답 모드로 동작**합니다. 나중에 언제든지 주석을 풀어 즉시 실제 DB 파기 시스템으로 활성화할 수 있습니다.
+4. **삭제 완료 후 조치**:
+   - 200 OK 수신 후 브라우저 구글 세션을 자동 로그아웃(`signOut()`) 처리하고 최종 안내 화면 제공.
+
+### 3.5. 상단 GNB 사용자 프로필 UI
+- 로그인 완료 시 상단 헤더에 사용자의 **전체 구글 이메일(`font-mono text-xs`)**과 **`[개인정보 조회/관리]`** 뱃지를 표시하여, 사용자가 개인정보 확인 및 관리를 위해 로그인했음을 명확히 인지하도록 설계.
 
 ---
 
@@ -78,32 +103,38 @@ landing/
 │   ├── layout.tsx                # NextAuth SessionProvider 및 Inter/JetBrains Mono 폰트, 메타데이터
 │   ├── page.tsx                  # 메인 랜딩 원페이지 (Hero, Apps, Privacy, Deletion, FAQ, Modal)
 │   ├── privacy/
-│   │   └── page.tsx              # 개인정보처리방침 전용 뷰 (서버 컴포넌트 마크다운 렌더링)
+│   │   └── page.tsx              # 개인정보처리방침 전용 뷰 (remark-gfm 표 렌더링 및 고대비 스타일)
 │   ├── globals.css               # Tailwind CSS v4 테마 토큰 및 @plugin typography 설정
 │   └── api/
 │       ├── auth/[...nextauth]/
 │       │   └── route.ts          # NextAuth v5 API 라우트 핸들러 (GET, POST)
-│       └── account/delete/
-│           └── route.ts          # 세션 검증 후 실행되는 계정 데이터 영구 삭제 Mock API 라우트
+│       └── account/
+│           ├── summary/
+│           │   └── route.ts      # 확인된 구글 이메일 기반 Supabase 실시간 데이터 사전 조회 API (POST)
+│           └── delete/
+│               └── route.ts      # 계정 데이터 영구 삭제 및 익명화 API (현재 DB 쿼리 주석 보존)
 ├── components/
 │   ├── Providers.tsx             # NextAuth SessionProvider 클라이언트 컴포넌트 래퍼
-│   ├── Header.tsx                # 상단 GNB (로고, 데스크톱/모바일 메뉴, 모달 퀵 링크)
+│   ├── Header.tsx                # 상단 GNB (이메일 전체 표시, 뱃지, 데스크톱/모바일 메뉴, 모달 퀵 링크)
 │   ├── Hero.tsx                  # 앰비언트 글로우, 메인 슬로건, 신뢰 지표 3종 카드
 │   ├── AppCard.tsx               # 개별 앱 카드 컴포넌트 (framer-motion 호버, 아이콘, 외장 링크)
 │   ├── AppGrid.tsx               # 6개 앱 쇼케이스 반응형 그리드
 │   ├── PrivacySummary.tsx        # 메인 페이지용 4대 핵심 정책 요약 카드
 │   ├── DeletionSection.tsx       # 데이터 파기 안내 및 구글 연동 삭제 절차 안내 섹션
-│   ├── DeleteDataModal.tsx       # 구글 로그인 본인 확인 및 데이터 삭제 2단계 확인 모달
+│   ├── DeleteDataModal.tsx       # 구글 로그인 본인 확인, 개인정보 사전 조회 및 삭제/익명화 확인 모달
 │   ├── FAQSection.tsx            # 인터랙티브 아코디언 FAQ 및 이메일 문의 카드
 │   └── Footer.tsx                # 저작권, 개발자 정보(GitHub doohee2), 정책 바로가기 링크
 ├── config/
 │   └── site.ts                   # 모든 문구, 브랜드 메타데이터, 앱 6종 설정을 중앙 관리하는 단일 진실 원천
 ├── content/
 │   └── privacy-policy.md         # Google OAuth 검수 규격 통합 개인정보처리방침 마크다운 원문
+├── lib/
+│   └── supabase.ts               # 서버 사이드 Supabase 클라이언트 유틸리티
 ├── auth.ts                       # NextAuth v5 설정 (Google Provider, least-privilege scope)
 ├── public/
 │   └── icons/
 │       └── apps/                 # 각 앱의 고화질 PNG 아이콘 에셋
+├── .env.example                  # 프로덕션 배포용 필수 환경 변수 5종 템플릿
 ├── package.json                  # 프로젝트 의존성 및 스크립트 정의
 └── GEMINI.md                     # 본 개발 및 운영 문서
 ```
@@ -112,28 +143,31 @@ landing/
 
 ## 🔐 5. 환경 변수 설정 (Environment Variables)
 
-구글 OAuth 연동을 위해 프로젝트 루트에 `.env.local` 파일을 생성하고 아래 키를 입력합니다:
+프로젝트 루트의 `.env.local` 파일 및 Vercel 배포 환경에 등록하는 **필수 5개 환경 변수** 목록입니다:
 
 ```env
-# NextAuth v5 Secret (openssl rand -base64 32 또는 임의의 난수 문자열)
+# 1. NextAuth v5 세션 암호화 키 (32자 이상 난수)
 AUTH_SECRET="your-nextauth-secret-key"
 
-# Google Cloud Console OAuth 2.0 Client ID & Secret
+# 2. Google Cloud Console OAuth 2.0 클라이언트 ID 및 시크릿
 AUTH_GOOGLE_ID="your-google-client-id.apps.googleusercontent.com"
 AUTH_GOOGLE_SECRET="your-google-client-secret"
 
-# 프로덕션 배포 시 필수 (로컬 개발 시 자동 감지)
-NEXTAUTH_URL="https://your-domain.vercel.app"
+# 3. Supabase 프로젝트 URL 및 익명 공개 API 키
+SUPABASE_URL="https://your-project.supabase.co"
+SUPABASE_ANON_KEY="your-supabase-anon-key"
 ```
 
-> **구글 클라우드 콘솔 설정 가이드:**
+> **Google Cloud Console 설정 가이드 (`redirect_uri_mismatch` 방지):**
 > 1. [Google Cloud Console](https://console.cloud.google.com/) > **API 및 서비스** > **사용자 인증 정보** 이동
-> 2. **승인된 자바스크립트 원본**:
+> 2. **승인된 자바스크립트 원본 (Origins)**:
 >    - `http://localhost:3000`
->    - `https://your-domain.vercel.app`
-> 3. **승인된 리디렉션 URI**:
+>    - `http://127.0.0.1:3000`
+>    - `https://<당신의-배포-도메인>.vercel.app`
+> 3. **승인된 리디렉션 URI (Redirect URIs)**:
 >    - `http://localhost:3000/api/auth/callback/google`
->    - `https://your-domain.vercel.app/api/auth/callback/google`
+>    - `http://127.0.0.1:3000/api/auth/callback/google`
+>    - `https://<당신의-배포-도메인>.vercel.app/api/auth/callback/google`
 
 ---
 
@@ -160,13 +194,19 @@ npm run lint
 
 ## 🔮 7. 향후 유지보수 및 확장 가이드 (Extension Guide)
 
-### 1) Supabase 실 데이터 삭제 쿼리 연결
-- `app/api/account/delete/route.ts` 파일의 `// TODO: Supabase delete queries` 주석 영역에 실제 Supabase 클라이언트 호출 쿼리를 삽입하면 즉시 프로덕션 삭제 시스템으로 전환됩니다.
+### 1) Supabase 실제 DB 데이터 삭제 쿼리 활성화 방법
+현재 [app/api/account/delete/route.ts](file:///c:/Users/doohe/OneDrive/Desktop/바이브코딩/landing/app/api/account/delete/route.ts) 파일의 실제 삭제 쿼리는 안전을 위해 주석 처리되어 있습니다.  
+실제 DB 레코드 삭제를 운영 환경에 반영하려면:
+1. 파일 상단의 `// import { supabase } from "@/lib/supabase";` 주석을 해제합니다.
+2. `/* ... */` 블록으로 감싸진 4개 테이블 삭제 및 익명화 쿼리의 주석을 해제하면 즉시 실시간 데이터 파기 시스템으로 전환됩니다.
+
 ```typescript
-// 예시:
-await supabase.from('user_profiles').delete().eq('email', userEmail);
-await supabase.from('reading_notes').delete().eq('user_id', userId);
-await supabase.from('vocab_records').delete().eq('user_id', userId);
+const [delPdfRes, delStudyRes, delNotionRes, anonWordRes] = await Promise.all([
+  supabase.from("pdf_metadata").delete().eq("user_id", userEmail),
+  supabase.from("study_history").delete().eq("user_email", userEmail),
+  supabase.from("user_notion_tokens").delete().eq("user_email", userEmail),
+  supabase.from("word_lists").update({ user_email: "anonymous" }).eq("user_email", userEmail),
+]);
 ```
 
 ### 2) 신규 애플리케이션 추가

@@ -17,9 +17,9 @@ export function Header({ onOpenDeleteModal }: HeaderProps) {
 
   return (
     <header className="fixed top-0 left-0 w-full z-40 bg-[#0b1326]/85 backdrop-blur-xl border-b border-white/5 shadow-[0_1px_8px_rgba(0,0,0,0.2)]">
-      <div className="h-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <div className="h-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
         {/* Brand Logo */}
-        <Link href="/" className="flex items-center gap-2 group">
+        <Link href="/" className="flex items-center gap-2 group shrink-0">
           <span className="text-lg font-bold text-slate-100 tracking-tight group-hover:text-indigo-300 transition-colors">
             {siteConfig.brand.name}
           </span>
@@ -29,7 +29,7 @@ export function Header({ onOpenDeleteModal }: HeaderProps) {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-1.5 lg:gap-3">
+        <nav className="hidden lg:flex items-center gap-1.5 xl:gap-3">
           <Link
             href="#apps-section"
             className="px-3 py-1.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors"
@@ -63,40 +63,45 @@ export function Header({ onOpenDeleteModal }: HeaderProps) {
           {session?.user ? (
             <button
               onClick={onOpenDeleteModal}
-              title={`${session.user.name || "사용자"} (데이터 관리)`}
-              className="flex items-center gap-2 p-1 pl-1.5 pr-2.5 rounded-full bg-[#171f33] hover:bg-[#222a3d] border border-white/10 transition-colors text-xs text-slate-200"
+              title={`${session.user.email || "사용자"} (개인정보 조회 및 데이터 관리)`}
+              className="flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-[#171f33] hover:bg-[#222a3d] border border-indigo-500/30 transition-all text-xs text-slate-200 shadow-sm cursor-pointer group"
             >
               {session.user.image ? (
                 <Image
                   src={session.user.image}
                   alt={session.user.name || "User"}
-                  width={26}
-                  height={26}
-                  className="rounded-full"
+                  width={24}
+                  height={24}
+                  className="rounded-full ring-1 ring-indigo-500/40 shrink-0"
                 />
               ) : (
-                <div className="w-6 h-6 rounded-full bg-indigo-600 flex items-center justify-center text-white text-[10px]">
-                  {session.user.name?.[0] || "U"}
+                <div className="w-6 h-6 rounded-full bg-indigo-600 flex items-center justify-center text-white text-[11px] font-bold shrink-0">
+                  {session.user.email?.[0]?.toUpperCase() || "U"}
                 </div>
               )}
-              <span className="hidden sm:inline-block max-w-[100px] truncate">
-                {session.user.name}
-              </span>
+              <div className="flex items-center gap-2 text-left">
+                <span className="font-mono text-xs text-slate-200 group-hover:text-indigo-200 transition-colors">
+                  {session.user.email}
+                </span>
+                <span className="hidden sm:inline-flex items-center px-1.5 py-0.5 rounded bg-indigo-500/20 text-[#c3c0ff] border border-indigo-500/30 text-[10px] font-medium whitespace-nowrap">
+                  개인정보 조회/관리
+                </span>
+              </div>
             </button>
           ) : (
             <button
               onClick={onOpenDeleteModal}
-              className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#171f33] hover:bg-[#222a3d] text-indigo-200 text-xs font-medium border border-indigo-500/20 transition-colors"
+              className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#171f33] hover:bg-[#222a3d] text-indigo-200 text-xs font-medium border border-indigo-500/20 transition-colors cursor-pointer"
             >
               <User className="w-3.5 h-3.5 text-indigo-400" />
-              <span>본인 인증 / 삭제</span>
+              <span>본인 인증 / 데이터 관리</span>
             </button>
           )}
 
           {/* Mobile Menu Toggle Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-white/5 transition-colors"
+            className="lg:hidden p-2 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-white/5 transition-colors cursor-pointer"
             aria-label="메뉴 열기"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -106,7 +111,41 @@ export function Header({ onOpenDeleteModal }: HeaderProps) {
 
       {/* Mobile Navigation Dropdown */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-white/5 bg-[#0b1326]/95 backdrop-blur-xl px-4 py-4 space-y-2">
+        <div className="lg:hidden border-t border-white/5 bg-[#0b1326]/95 backdrop-blur-xl px-4 py-4 space-y-2">
+          {session?.user && (
+            <div
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onOpenDeleteModal();
+              }}
+              className="mb-3 p-3 rounded-xl bg-[#171f33] border border-indigo-500/30 flex items-center justify-between cursor-pointer"
+            >
+              <div className="flex items-center gap-2.5 min-w-0">
+                {session.user.image ? (
+                  <Image
+                    src={session.user.image}
+                    alt={session.user.name || "User"}
+                    width={28}
+                    height={28}
+                    className="rounded-full shrink-0 ring-1 ring-indigo-500/40"
+                  />
+                ) : (
+                  <div className="w-7 h-7 rounded-full bg-indigo-600 flex items-center justify-center text-white text-xs font-bold shrink-0">
+                    {session.user.email?.[0]?.toUpperCase() || "U"}
+                  </div>
+                )}
+                <div className="min-w-0">
+                  <div className="text-xs font-mono text-slate-100 truncate">
+                    {session.user.email}
+                  </div>
+                  <div className="text-[10px] text-indigo-300 font-medium">
+                    개인정보 조회 및 데이터 관리
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
           <Link
             href="#apps-section"
             onClick={() => setMobileMenuOpen(false)}
@@ -127,7 +166,7 @@ export function Header({ onOpenDeleteModal }: HeaderProps) {
               setMobileMenuOpen(false);
               onOpenDeleteModal();
             }}
-            className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-red-300 hover:bg-red-500/10 transition-colors text-left"
+            className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-red-300 hover:bg-red-500/10 transition-colors text-left cursor-pointer"
           >
             <Trash2 className="w-4 h-4 text-red-400" />
             <span>데이터 삭제 요청 (Data Deletion)</span>
