@@ -1,11 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
-import { useSession } from "next-auth/react";
-import Image from "next/image";
-import { Menu, X, Trash2, Shield, User } from "lucide-react";
+import { useSession, signOut } from "next-auth/react";
+import { Menu, X, Trash2, Shield, User, LogOut } from "lucide-react";
 
 interface HeaderProps {
   onOpenDeleteModal: () => void;
@@ -13,7 +12,11 @@ interface HeaderProps {
 
 export function Header({ onOpenDeleteModal }: HeaderProps) {
   const { data: session } = useSession();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+
+  const handleSignOut = async () => {
+    await signOut({ redirect: false });
+  };
 
   return (
     <header className="fixed top-0 left-0 w-full z-40 bg-[#0b1326]/85 backdrop-blur-xl border-b border-white/5 shadow-[0_1px_8px_rgba(0,0,0,0.2)]">
@@ -62,17 +65,17 @@ export function Header({ onOpenDeleteModal }: HeaderProps) {
         <div className="flex items-center gap-2.5">
           {session?.user ? (
             <button
-              onClick={onOpenDeleteModal}
-              title={`${session.user.email || "사용자"} (개인정보 조회 및 데이터 관리)`}
-              className="flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-[#171f33] hover:bg-[#222a3d] border border-indigo-500/30 transition-all text-xs text-slate-200 shadow-sm cursor-pointer group"
+              onClick={handleSignOut}
+              title={`${session.user.email || "사용자"} (클릭 시 로그아웃)`}
+              className="flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-[#171f33] hover:bg-red-950/30 border border-indigo-500/30 hover:border-red-500/40 transition-all text-xs text-slate-200 shadow-sm cursor-pointer group"
             >
               {session.user.image ? (
-                <Image
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
                   src={session.user.image}
                   alt={session.user.name || "User"}
-                  width={24}
-                  height={24}
-                  className="rounded-full ring-1 ring-indigo-500/40 shrink-0"
+                  referrerPolicy="no-referrer"
+                  className="w-6 h-6 rounded-full object-cover ring-1 ring-indigo-500/40 shrink-0"
                 />
               ) : (
                 <div className="w-6 h-6 rounded-full bg-indigo-600 flex items-center justify-center text-white text-[11px] font-bold shrink-0">
@@ -80,11 +83,12 @@ export function Header({ onOpenDeleteModal }: HeaderProps) {
                 </div>
               )}
               <div className="flex items-center gap-2 text-left">
-                <span className="font-mono text-xs text-slate-200 group-hover:text-indigo-200 transition-colors">
+                <span className="font-mono text-xs text-slate-200 group-hover:text-red-200 transition-colors">
                   {session.user.email}
                 </span>
-                <span className="hidden sm:inline-flex items-center px-1.5 py-0.5 rounded bg-indigo-500/20 text-[#c3c0ff] border border-indigo-500/30 text-[10px] font-medium whitespace-nowrap">
-                  개인정보 조회/관리
+                <span className="hidden sm:inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-red-500/10 text-red-300 border border-red-500/20 text-[10px] font-medium group-hover:bg-red-500/20 transition-colors whitespace-nowrap">
+                  <LogOut className="w-3 h-3 text-red-400" />
+                  <span>로그아웃</span>
                 </span>
               </div>
             </button>
@@ -116,18 +120,18 @@ export function Header({ onOpenDeleteModal }: HeaderProps) {
             <div
               onClick={() => {
                 setMobileMenuOpen(false);
-                onOpenDeleteModal();
+                void handleSignOut();
               }}
-              className="mb-3 p-3 rounded-xl bg-[#171f33] border border-indigo-500/30 flex items-center justify-between cursor-pointer"
+              className="mb-3 p-3 rounded-xl bg-[#171f33] hover:bg-red-950/30 border border-indigo-500/30 hover:border-red-500/40 flex items-center justify-between cursor-pointer transition-colors"
             >
               <div className="flex items-center gap-2.5 min-w-0">
                 {session.user.image ? (
-                  <Image
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
                     src={session.user.image}
                     alt={session.user.name || "User"}
-                    width={28}
-                    height={28}
-                    className="rounded-full shrink-0 ring-1 ring-indigo-500/40"
+                    referrerPolicy="no-referrer"
+                    className="w-7 h-7 rounded-full object-cover shrink-0 ring-1 ring-indigo-500/40"
                   />
                 ) : (
                   <div className="w-7 h-7 rounded-full bg-indigo-600 flex items-center justify-center text-white text-xs font-bold shrink-0">
@@ -138,8 +142,9 @@ export function Header({ onOpenDeleteModal }: HeaderProps) {
                   <div className="text-xs font-mono text-slate-100 truncate">
                     {session.user.email}
                   </div>
-                  <div className="text-[10px] text-indigo-300 font-medium">
-                    개인정보 조회 및 데이터 관리
+                  <div className="text-[10px] text-red-300 font-medium flex items-center gap-1 mt-0.5">
+                    <LogOut className="w-2.5 h-2.5 text-red-400" />
+                    <span>터치하여 로그아웃</span>
                   </div>
                 </div>
               </div>

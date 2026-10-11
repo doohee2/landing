@@ -19,7 +19,6 @@ import {
   RefreshCw,
   Eye,
 } from "lucide-react";
-import Image from "next/image";
 
 interface DeleteDataModalProps {
   isOpen: boolean;
@@ -295,12 +294,12 @@ export function DeleteDataModal({ isOpen, onClose }: DeleteDataModalProps) {
                   <div className="p-3.5 rounded-xl bg-[#171f33] border border-white/5 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       {session.user.image ? (
-                        <Image
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
                           src={session.user.image}
                           alt={session.user.name || "Profile"}
-                          width={40}
-                          height={40}
-                          className="rounded-full ring-2 ring-indigo-500/30"
+                          referrerPolicy="no-referrer"
+                          className="w-10 h-10 rounded-full object-cover ring-2 ring-indigo-500/30"
                         />
                       ) : (
                         <div className="w-10 h-10 rounded-full bg-indigo-600/30 text-indigo-300 font-bold flex items-center justify-center">
