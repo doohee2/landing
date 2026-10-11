@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import Link from "next/link";
 import { ArrowLeft, Shield, FileText } from "lucide-react";
 import type { Metadata } from "next";
@@ -26,7 +27,7 @@ export default function PrivacyPage() {
       <div className="max-w-4xl mx-auto mb-8">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#171f33] hover:bg-[#222a3d] text-indigo-300 hover:text-white border border-white/5 transition-all text-xs font-semibold mb-6 group"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#171f33] hover:bg-[#222a3d] text-indigo-300 hover:text-white border border-white/5 transition-all text-xs font-semibold mb-6 group cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
           <span>메인 화면으로 돌아가기</span>
@@ -38,7 +39,7 @@ export default function PrivacyPage() {
               <Shield className="w-6 h-6" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-slate-100 flex items-center gap-2">
+              <h1 className="text-xl font-bold text-white flex items-center gap-2">
                 <span>통합 개인정보처리방침</span>
                 <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                   Google OAuth 2.0 검수 규격
@@ -58,9 +59,103 @@ export default function PrivacyPage() {
       </div>
 
       {/* Markdown Content Container */}
-      <main className="max-w-4xl mx-auto p-8 sm:p-12 rounded-3xl bg-[#171f33]/80 border border-white/5 shadow-2xl backdrop-blur-md">
-        <article className="prose prose-indigo dark:prose-invert max-w-none prose-headings:text-slate-100 prose-headings:font-bold prose-h1:text-2xl prose-h2:text-xl prose-h3:text-lg prose-p:text-slate-300 prose-p:leading-relaxed prose-li:text-slate-300 prose-table:text-sm prose-th:text-slate-200 prose-td:text-slate-300 prose-strong:text-indigo-200 prose-hr:border-white/10">
-          <ReactMarkdown>{content}</ReactMarkdown>
+      <main className="max-w-4xl mx-auto p-6 sm:p-12 rounded-3xl bg-[#171f33]/90 border border-white/10 shadow-2xl backdrop-blur-md">
+        <article className="text-slate-200">
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            components={{
+              table: ({ children }) => (
+                <div className="my-6 w-full overflow-x-auto rounded-xl border border-slate-700/80 bg-[#0f172a] shadow-lg">
+                  <table className="w-full text-left text-sm text-slate-200 border-collapse">
+                    {children}
+                  </table>
+                </div>
+              ),
+              thead: ({ children }) => (
+                <thead className="bg-[#1e293b] text-xs uppercase font-semibold text-white border-b border-slate-700">
+                  {children}
+                </thead>
+              ),
+              th: ({ children }) => (
+                <th className="px-5 py-3.5 font-bold tracking-wider text-white">
+                  {children}
+                </th>
+              ),
+              tbody: ({ children }) => (
+                <tbody className="divide-y divide-slate-800/90 bg-[#0f172a]/70">
+                  {children}
+                </tbody>
+              ),
+              tr: ({ children }) => (
+                <tr className="hover:bg-slate-800/50 transition-colors">
+                  {children}
+                </tr>
+              ),
+              td: ({ children }) => (
+                <td className="px-5 py-3.5 text-slate-200 leading-relaxed font-normal">
+                  {children}
+                </td>
+              ),
+              h1: ({ children }) => (
+                <h1 className="text-2xl sm:text-3xl font-extrabold text-white mt-8 mb-4 tracking-tight border-b border-slate-700/70 pb-3">
+                  {children}
+                </h1>
+              ),
+              h2: ({ children }) => (
+                <h2 className="text-xl sm:text-2xl font-bold text-white mt-8 mb-3 tracking-tight">
+                  {children}
+                </h2>
+              ),
+              h3: ({ children }) => (
+                <h3 className="text-lg sm:text-xl font-bold text-indigo-300 mt-8 mb-3 flex items-center gap-2">
+                  {children}
+                </h3>
+              ),
+              p: ({ children }) => (
+                <p className="text-slate-200 text-sm sm:text-base leading-relaxed my-3 font-normal">
+                  {children}
+                </p>
+              ),
+              ul: ({ children }) => (
+                <ul className="list-disc list-outside pl-6 space-y-2 my-3 text-slate-200 text-sm sm:text-base">
+                  {children}
+                </ul>
+              ),
+              ol: ({ children }) => (
+                <ol className="list-decimal list-outside pl-6 space-y-2 my-3 text-slate-200 text-sm sm:text-base">
+                  {children}
+                </ol>
+              ),
+              li: ({ children }) => (
+                <li className="text-slate-200 leading-relaxed pl-1">
+                  {children}
+                </li>
+              ),
+              strong: ({ children }) => (
+                <strong className="font-bold text-white tracking-wide">
+                  {children}
+                </strong>
+              ),
+              code: ({ children }) => (
+                <code className="px-1.5 py-0.5 rounded-md bg-[#222a3d] text-[#c3c0ff] border border-white/10 font-mono text-xs font-semibold">
+                  {children}
+                </code>
+              ),
+              hr: () => <hr className="my-8 border-slate-700/60" />,
+              a: ({ href, children }) => (
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-indigo-400 hover:text-indigo-300 underline underline-offset-4 font-medium transition-colors"
+                >
+                  {children}
+                </a>
+              ),
+            }}
+          >
+            {content}
+          </ReactMarkdown>
         </article>
       </main>
 
