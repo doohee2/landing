@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/auth";
-import { supabase } from "@/lib/supabase";
+// import { supabase } from "@/lib/supabase";
 
 export async function POST() {
   try {
@@ -21,7 +21,11 @@ export async function POST() {
     const userEmail = session.user.email;
     const userId = session.user.id || session.user.email;
 
-    // 2. Execute deletion and anonymization transactions across the 4 specified tables
+    // =========================================================================
+    // [임시 비활성화] DB 테이블 실제 삭제 및 익명화 루틴
+    // 나중에 다시 활성화할 때는 아래 주석을 풀고 상단의 supabase import를 켜주세요.
+    // =========================================================================
+    /*
     const [delPdfRes, delStudyRes, delNotionRes, anonWordRes] = await Promise.all([
       // (1) 이북 리더기 앱 독서 기록 완전 삭제 (pdf_metadata.user_id = userEmail)
       supabase.from("pdf_metadata").delete().eq("user_id", userEmail),
@@ -39,7 +43,6 @@ export async function POST() {
         .eq("user_email", userEmail),
     ]);
 
-    // Check for any errors during deletion
     if (delPdfRes.error) {
       console.error("Failed to delete pdf_metadata:", delPdfRes.error);
     }
@@ -52,18 +55,19 @@ export async function POST() {
     if (anonWordRes.error) {
       console.error("Failed to anonymize word_lists:", anonWordRes.error);
     }
+    */
 
     return NextResponse.json(
       {
         success: true,
-        message: `계정(${userEmail})과 연동된 모든 개인정보 및 이용 기록이 성공적으로 삭제 및 익명화 처리되었습니다.`,
+        message: `계정(${userEmail})의 데이터 삭제 요청이 정상 접수되었습니다. (현재 DB 실제 삭제 루틴은 안전을 위해 비활성화되어 있습니다)`,
         deletedUserId: userId,
         deletedAt: new Date().toISOString(),
         details: {
-          pdfMetadata: delPdfRes.error ? "failed" : "deleted",
-          studyHistory: delStudyRes.error ? "failed" : "deleted",
-          notionTokens: delNotionRes.error ? "failed" : "deleted",
-          wordLists: anonWordRes.error ? "failed" : "anonymized_to_anonymous",
+          pdfMetadata: "bypassed",
+          studyHistory: "bypassed",
+          notionTokens: "bypassed",
+          wordLists: "bypassed",
         },
       },
       { status: 200 }
