@@ -32,21 +32,19 @@ export const siteConfig = {
     name: "아무거나",
     subName: "Studio",
     tagline: "Indie Vibe Lab",
-    description: "유쾌하고 간결한 인디 소프트웨어를 만들고 배포합니다.",
+    description: "가볍게 일상에서 사용 가능한 인디 소프트웨어를 만들고 배포합니다.",
     developer: "doohee2",
     githubUrl: "https://github.com/doohee2",
-    email: "contact@amugeona.studio",
-    copyright: "© 2026 아무거나 (Amugeona) Studio · Vibe Coding. All rights reserved.",
+    email: "doohee2@gmail.com",
+    copyright: "© 2026 아무거나 Studio · Vibe Coding. All rights reserved.",
     disclaimer: "본 사이트는 서비스 이용자의 개인정보 및 권리 보호 관련 법령을 준수합니다.",
   },
-
   nav: [
     { label: "앱 목록 (Apps)", href: "#apps-section" },
     { label: "개인정보처리방침 (Privacy)", href: "/privacy" },
     { label: "데이터 삭제 (Data Deletion)", href: "#deletion-section" },
     { label: "FAQ (자주 묻는 질문)", href: "#faq-section" },
   ],
-
   hero: {
     pillBadge: "Vibe Coding Project · 아무거나",
     title: "생활의 편의를 위해 만든,\n‘아무거나’ 앱들을 만나보세요",
@@ -62,7 +60,7 @@ export const siteConfig = {
       },
       {
         title: "안전한 구글 OAuth",
-        description: "공식 Google 2.0 프로토콜",
+        description: "공식 Google OAuth 2.0 프로토콜",
         iconName: "lock",
       },
       {
@@ -72,7 +70,6 @@ export const siteConfig = {
       },
     ] as MetricItem[],
   },
-
   apps: {
     badge: "Application Suite",
     title: "출시된 앱 모아보기",
@@ -86,7 +83,7 @@ export const siteConfig = {
         url: "https://simple-reader-doohee2.vercel.app/",
         icon: "/icons/apps/simple-reader.png",
         tags: ["#PDF뷰어", "#메모공유", "#독서"],
-        version: "v1.2.0 · Web/Mobile",
+        version: "v.beta · PWA, Next.js, OAuth, react-pdf",
       },
       {
         id: "word-smart",
@@ -96,7 +93,7 @@ export const siteConfig = {
         url: "https://word-smart-doohee2.vercel.app/",
         icon: "/icons/apps/word-smart.png",
         tags: ["#단어학습", "#어학공부", "#기록관리"],
-        version: "v1.4.2 · SRS Engine",
+        version: "v.beta · PWA, Next.js, OAuth",
       },
       {
         id: "simple-schedule",
@@ -106,17 +103,17 @@ export const siteConfig = {
         url: "https://simple-schedule-doohee2.vercel.app/",
         icon: "/icons/apps/simple-schedule.png",
         tags: ["#구글캘린더연동", "#노션체크리스트", "#일정관리"],
-        version: "v2.0.1 · Sync Enabled",
+        version: "v.beta · PWA, Next.js, OAuth, Notion API",
       },
       {
         id: "my-drive-finder",
         name: "My Drive Finder",
         category: "Cloud Search",
-        description: "구글 드라이브 내 대용량 Excel, CSV 파일의 내용을 클라이언트 사이드에서 초고속 검색하는 앱",
+        description: "구글 드라이브 내 대용량 Excel, CSV 파일의 내용을 클라이언트 캐시에서 검색하는 앱",
         url: "https://my-drive-finder-doohee2.vercel.app/",
         icon: "/icons/apps/my-drive-finder.png",
         tags: ["#구글드라이브", "#엑셀검색", "#CSV조회"],
-        version: "v1.1.0 · Client-side Parser",
+        version: "v.beta · PWA, Next.js, OAuth",
       },
       {
         id: "lens-dictionary",
@@ -126,7 +123,7 @@ export const siteConfig = {
         url: "https://lens-dict-doohee2.vercel.app/",
         icon: "/icons/apps/lens-dictionary.png",
         tags: ["#카메라스캔", "#영한사전", "#스타딕지원"],
-        version: "v1.3.1 · Fast OCR",
+        version: "v.beta · PWA, Next.js, Tesseract, Cloud Vision API",
       },
       {
         id: "subway-tracker",
@@ -136,11 +133,10 @@ export const siteConfig = {
         url: "https://subway-tracker-doohee2.vercel.app/",
         icon: "/icons/apps/subway-tracker.png",
         tags: ["#지하철도착정보", "#실시간조회", "#대중교통"],
-        version: "v1.0.5 · Live Open API",
+        version: "v.beta · PWA, Next.js, 공공 데이터 API",
       },
     ] as AppItem[],
   },
-
   privacySummary: {
     badge: "Google OAuth Developer Policy",
     title: "개인정보처리방침 요약",
@@ -162,7 +158,7 @@ export const siteConfig = {
       },
       {
         title: "보유 및 이용 기간",
-        description: "요청 즉시 파기 또는 회원 탈퇴 시까지",
+        description: "요청 즉시 파기",
         detail: "• 사용자 요청 시 데이터 무기한 보관 없음",
         iconName: "timer",
       },
@@ -174,7 +170,6 @@ export const siteConfig = {
       },
     ] as PrivacyItem[],
   },
-
   dataDeletion: {
     badge: "User Rights & Erasure",
     title: "개인정보 및 이용 기록 삭제 안내",
@@ -182,13 +177,13 @@ export const siteConfig = {
     immediateErasure: {
       badge: "[즉시 파기]",
       title: "사용 기록 및 환경 설정",
-      description: "사용자의 앱 사용 로그, 테마, 알림 시간, 디바이스 연결 설정 등 개인화 정보는 삭제 요청 즉시 데이터베이스에서 물리적 파기되어 복구 불가능합니다.",
+      description: "사용자의 학습 기록, 앱 사용 로그, 설정 정보 등 개인화 정보는 삭제 요청 즉시 데이터베이스에서 물리적 파기되어 복구 불가능합니다.",
       footer: "데이터 영구 삭제 보장",
     },
     anonymization: {
       badge: "[익명화 처리]",
-      title: "단어장 학습 데이터",
-      description: "공유형 단어장 및 어학 코퍼스는 다른 사용자 생태계와의 연결 및 학습 호환성을 위해 작성자의 고유 식별자(이메일, ID)를 완전한 영구 무작위 해시로 익명화 처리합니다.",
+      title: "단어장 데이터",
+      description: "공유형 단어장 및 어학 코퍼스는 다른 사용자 생태계와의 연결 및 학습 호환성을 위해 작성자의 고유 식별자(이메일, ID)를 완전하게 익명화 처리합니다.",
       footer: "작성자 식별정보 영구 마스킹",
     },
     selfService: {
@@ -198,28 +193,43 @@ export const siteConfig = {
       steps: [
         "하단 구글 계정 인증 클릭",
         "삭제 확인 및 파기 요청 진행",
-        "즉시 파기 및 세션 자동 로그아웃 확인",
+        "즉시 파기 결과 확인",
       ],
       buttonText: "Google 계정으로 데이터 삭제 요청",
     },
   },
-
   faq: {
     badge: "FAQ & Help",
     title: "자주 묻는 질문",
     description: "이용자분들이 가장 궁금해하시는 점들을 투명하게 안내해 드립니다.",
     items: [
       {
-        question: "앱들은 계속 개발이 되는 건가요?",
-        answer: "현재 기능으로 안정적으로 제공되나, 바이브 코딩 및 인디 프로젝트 특성상 추후 기능 추가나 지속적인 대규모 업데이트 개선을 공식 약속할 수는 없습니다. 하지만 중요한 버그 수정과 API 변경에 대응하는 유지보수는 지속적으로 모니터링하여 대응하고 있습니다.",
+        question: "구글 계정 로그인이 되지 않고 잘못된 접근으로 나옵니다.",
+        answer: "현재 각 앱들은 테스트 용도로 등록된 이메일들에 대해서만 로그인이 가능하므로, 일부 앱들은 기능의 제한이 있습니다. 구글 OAuth 배포 심사 이후에 모든 구글 사용자가 이용가능합니다.",
+      },
+      {
+        question: "모바일 PWA 앱이 무엇이죠? 왜 따로 등록해서 사용해야 하나요?",
+        answer: "Progressive Web App(PWA)는 웹 기반으로 사용자가 스마트폰이나 PC에 설치해 네이티브 앱처럼 사용할 수 있는 애플리케이션입니다. 로컬 데이터의 안전한 관리와 사용자 편의를 위해 브라우저의 '홈 화면에 추가' 기능을 이용해 PWA 앱으로 등록 사용을 권장합니다.",
+      },
+      {
+        question: "서비스는 어떤 인프라 환경에서 서비스가 제공되는 건가요?",
+        answer: "각 앱 서비스는 모두 Next.js 서버리스 인프라 Vercel, 오픈소스 데이터베이스 Supabase 등의 무료 인프라를 이용해 제공됩니다. 따라서 추후 해당 업체의 정책 변경 시 서비스 제공 범위가 변동될 수 있습니다.",
+      },
+      {
+        question: "앱들은 계속 유지보수 개발이 되는 건가요?",
+        answer: "현재 안정적으로 기능이 제공되고 있으나, 바이브 코딩 및 인디 프로젝트 특성상 추후 기능 추가나 지속적인 업데이트 개선을 공식 약속할 수는 없습니다. 하지만 중요한 버그 수정과 API 변경에 대응하는 유지보수는 모니터링하여 대응하고 있습니다.",
       },
       {
         question: "개인정보는 안전한가요?",
         answer: "구글 계정 연동은 안전한 Google 공식 OAuth 2.0 인증을 통해 사용자 구분을 위해서만 사용되며, 주민등록번호, 비밀번호 등 민감한 개인정보는 일체 수집하거나 서버에 저장하지 않습니다. 자세한 사항은 상단의 개인정보처리방침을 참고해 주세요.",
       },
       {
-        question: "구글 드라이브 파일 권한은 안전한가요?",
-        answer: "'My Drive Finder' 앱은 사용자가 지정한 파일의 검색 조회 목적으로만 최소한의 읽기 권한을 클라이언트 브라우저 세션 내에서 요청하며, 서버로 파일 원본이나 열람 내용을 별도로 전송하거나 저장하지 않습니다.",
+        question: "구글 드라이브 파일 읽기, 쓰기 권한은 왜 필요한가요?",
+        answer: "'Simple Reader', 'Word Smart', 'My Drive Finder'는 사용자가 선택한 PDF 파일, 단어장 파일 등의 열람 및 로컬 캐싱을 위해 읽기 권한(Scope: auth/drive.readonly)을, 'My Drive Finder'는 추가로 파일 수동 업로드를 위해 최소한의 읽기/쓰기 권한(Scope: auth/drive.file)을 클라이언트 브라우저 세션 내에서만 요청합니다. 두 앱 모두 사용자 동의 없이 외부 서버로 파일 원본이나 내용을 전송하지 않습니다.",
+      },
+      {
+        question: "Is Korean the only supported language? 한글 외 외국어 지원은 불가능한가요?",
+        answer: "We're sorry, but we don't currently plan to support other languages. 아쉽지만 현재 외국어 지원 예정은 없습니다.",
       },
     ] as FaqItem[],
     supportTitle: "더 궁금한 점이 있으신가요?",
