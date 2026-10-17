@@ -3,7 +3,7 @@ import path from "path";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import Link from "next/link";
-import { ArrowLeft, Shield, FileText } from "lucide-react";
+import { ArrowLeft, Shield, FileText, Trash2 } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -25,13 +25,23 @@ export default function PrivacyPage() {
     <div className="min-h-screen bg-[#0b1326] text-slate-100 py-12 px-4 sm:px-6 lg:px-8">
       {/* Top Header Navigation */}
       <div className="max-w-4xl mx-auto mb-8">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#171f33] hover:bg-[#222a3d] text-indigo-300 hover:text-white border border-white/5 transition-all text-xs font-semibold mb-6 group cursor-pointer"
-        >
-          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-          <span>메인 화면으로 돌아가기</span>
-        </Link>
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#171f33] hover:bg-[#222a3d] text-indigo-300 hover:text-white border border-white/5 transition-all text-xs font-semibold group cursor-pointer"
+          >
+            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+            <span>메인 화면으로 돌아가기</span>
+          </Link>
+
+          <Link
+            href="/?action=delete#deletion-section"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#171f33] hover:bg-red-950/40 text-red-300 hover:text-red-200 border border-red-500/20 hover:border-red-500/40 transition-all text-xs font-semibold group cursor-pointer"
+          >
+            <Trash2 className="w-4 h-4 text-red-400 group-hover:scale-110 transition-transform" />
+            <span>데이터 삭제 요청</span>
+          </Link>
+        </div>
 
         <div className="p-6 rounded-2xl bg-[#171f33] border border-white/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xl">
           <div className="flex items-center gap-3.5">
@@ -159,14 +169,22 @@ export default function PrivacyPage() {
         </article>
       </main>
 
-      {/* Footer Back Link */}
-      <div className="max-w-4xl mx-auto mt-12 text-center">
+      {/* Bottom Navigation Links */}
+      <div className="max-w-4xl mx-auto mt-8 flex flex-wrap items-center justify-between gap-3">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-indigo-300 transition-colors"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#171f33] hover:bg-[#222a3d] text-indigo-300 hover:text-white border border-white/5 transition-all text-xs font-semibold group cursor-pointer"
         >
-          <ArrowLeft className="w-4 h-4" />
+          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
           <span>메인 화면으로 돌아가기</span>
+        </Link>
+
+        <Link
+          href="/?action=delete#deletion-section"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#171f33] hover:bg-red-950/40 text-red-300 hover:text-red-200 border border-red-500/20 hover:border-red-500/40 transition-all text-xs font-semibold group cursor-pointer"
+        >
+          <Trash2 className="w-4 h-4 text-red-400 group-hover:scale-110 transition-transform" />
+          <span>데이터 삭제 요청</span>
         </Link>
       </div>
     </div>

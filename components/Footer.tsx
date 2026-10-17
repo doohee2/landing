@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { Mail, Shield, Trash2 } from "lucide-react";
+import { BrandLogoIcon } from "@/components/BrandLogoIcon";
 
 function GithubIcon({ className }: { className?: string }) {
   return (
@@ -29,6 +30,7 @@ export function Footer({ onOpenDeleteModal }: FooterProps) {
           {/* Brand info */}
           <div className="flex flex-col gap-1.5">
             <div className="flex items-center gap-2.5">
+              <BrandLogoIcon className="w-6 h-6 rounded-md shrink-0" />
               <span className="text-base font-bold text-slate-100">
                 {siteConfig.brand.name} {siteConfig.brand.subName}
               </span>

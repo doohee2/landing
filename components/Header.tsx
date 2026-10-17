@@ -5,6 +5,7 @@ import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { useSession, signOut } from "next-auth/react";
 import { Menu, X, Trash2, Shield, User, LogOut } from "lucide-react";
+import { BrandLogoIcon } from "@/components/BrandLogoIcon";
 
 interface HeaderProps {
   onOpenDeleteModal: () => void;
@@ -22,13 +23,16 @@ export function Header({ onOpenDeleteModal }: HeaderProps) {
     <header className="fixed top-0 left-0 w-full z-40 bg-[#0b1326]/85 backdrop-blur-xl border-b border-white/5 shadow-[0_1px_8px_rgba(0,0,0,0.2)]">
       <div className="h-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
         {/* Brand Logo */}
-        <Link href="/" className="flex items-center gap-2 group shrink-0">
-          <span className="text-lg font-bold text-slate-100 tracking-tight group-hover:text-indigo-300 transition-colors">
-            {siteConfig.brand.name}
-          </span>
-          <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-[#3e37a9] text-[#b3b0ff] uppercase tracking-wider font-semibold border border-indigo-500/30">
-            {siteConfig.brand.subName}
-          </span>
+        <Link href="/" className="flex items-center gap-2.5 group shrink-0">
+          <BrandLogoIcon className="w-8 h-8 rounded-lg shadow-sm group-hover:scale-105 transition-transform duration-200 shrink-0" />
+          <div className="flex items-center gap-2">
+            <span className="text-lg font-bold text-slate-100 tracking-tight group-hover:text-indigo-300 transition-colors">
+              {siteConfig.brand.name}
+            </span>
+            <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-[#3e37a9] text-[#b3b0ff] uppercase tracking-wider font-semibold border border-indigo-500/30">
+              {siteConfig.brand.subName}
+            </span>
+          </div>
         </Link>
 
         {/* Desktop Navigation */}

@@ -32,6 +32,13 @@ export const metadata: Metadata = {
     "개인정보처리방침",
   ],
   authors: [{ name: siteConfig.brand.developer, url: siteConfig.brand.githubUrl }],
+  icons: {
+    icon: [
+      { url: "/icons/logo.svg", type: "image/svg+xml" },
+      { url: "/icons/logo.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: "/icons/logo.png",
+  },
   openGraph: {
     title: `${siteConfig.brand.name} ${siteConfig.brand.subName}`,
     description: siteConfig.hero.subtitle,

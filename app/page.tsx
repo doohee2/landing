@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { AppGrid } from "@/components/AppGrid";
@@ -12,6 +12,13 @@ import { DeleteDataModal } from "@/components/DeleteDataModal";
 
 export default function Home() {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("action") === "delete") {
+      setIsDeleteModalOpen(true);
+    }
+  }, []);
 
   const handleOpenDeleteModal = () => {
     setIsDeleteModalOpen(true);
