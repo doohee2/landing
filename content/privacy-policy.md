@@ -1,7 +1,10 @@
 # 개인정보처리방침 (Privacy Policy)
 
-**시행일자: 2026년 10월 10일**  
-**최종 수정일: 2026년 10월 10일**
+> 💡 **안내 / Notice**: 본 문서는 한국어(Korean)와 영문(English)이 함께 제공됩니다. 영문 버전은 한국어 본문 하단에서 확인하실 수 있습니다.  
+> *(English version of this Privacy Policy is provided below the Korean text.)*
+
+**시행일자 (Effective Date): 2026년 10월 10일 (October 10, 2026)**  
+**최종 수정일 (Last Updated): 2026년 10월 18일 (October 18, 2026)**
 
 본 서비스(이하 '서비스')는 이용자의 개인정보를 중요시하며, 「개인정보 보호법」 및 구글 API 서비스 사용자 데이터 정책(Google API Services User Data Policy)을 엄격히 준수합니다. 본 방침은 당사가 운영 및 배포하는 웹 애플리케이션 제품군(**Simple Reader, My Drive Finder, Simple Schedule, Word Smart, Lens Dictionary, Subway Tracker** 등)에 공통으로 적용됩니다.
 
@@ -56,10 +59,10 @@
 
 3. **이용자 주도형 데이터 파기 및 계정 연결 해제 방법 (구글 검수 필수 요건)**
    이용자는 언제든지 자신의 개인정보와 저장 데이터를 직접 파기할 수 있는 완전한 통제권을 가집니다:
-   * **앱 내 데이터 초기화 버튼:** 각 애플리케이션의 **[설정] > [계정 관리] > [모든 데이터 초기화 및 연결 해제]** 버튼을 통해 Supabase에 저장된 모든 데이터 레코드와 기기 로컬 캐시를 즉시 영구 삭제할 수 있습니다.
+   * **랜딩 페이지 및 앱 내 데이터 초기화 버튼:** 본 공식 랜딩 페이지의 **[데이터 삭제 요청]** 기능 또는 각 애플리케이션의 **[설정] > [계정 관리] > [모든 데이터 초기화 및 연결 해제]** 버튼을 통해 Supabase에 저장된 모든 데이터 레코드와 기기 로컬 캐시를 즉시 영구 삭제할 수 있습니다.
    * **본인 확인 절차:** 비인가자에 의한 악의적 데이터 훼손을 방지하기 위해, 데이터 초기화 실행 시 **구글 OAuth 재인증(로그인)**을 거쳐 소유자 본인임을 확인한 후 파기를 집행합니다.
    * **오프라인 캐시 전수 소각:** 사용자가 로그아웃하거나 데이터를 초기화할 경우, 서비스 워커 캐시 스토리지(Cache API)와 IndexedDB/LocalStorage에 잔류하는 오프라인 민감 캐시를 즉시 완전히 소각합니다.
-   * **서면 요청 채널:** 앱 UI 접근이 불가능한 경우, 개인정보 관리 책임자 이메일(앱 내 지원 채널)로 구글 계정 정보를 기재하여 삭제를 요청하면 접수 즉시 영구 파기 처리됩니다.
+   * **서면 요청 채널:** 앱 UI 접근이 불가능한 경우, 개인정보 관리 책임자 이메일(`doohee2@gmail.com`)로 구글 계정 정보를 기재하여 삭제를 요청하면 접수 즉시 영구 파기 처리됩니다.
 
 ---
 
@@ -100,11 +103,127 @@
 
 이용자의 개인정보 관련 문의, 불만 처리, 데이터 삭제 요구 등은 아래의 책임자에게 문의하실 수 있습니다.
 
-* **개발자 / 운영자:** doohee2
-* **문의 채널:** 앱 내 설정 메뉴 고객지원 링크 또는 GitHub 저장소(`doohee2`) 이슈 게시판
+* **개발자 / 운영자:** 아무거나 Studio (`doohee2`)
+* **이메일:** `doohee2@gmail.com`
+* **GitHub:** [https://github.com/doohee2](https://github.com/doohee2)
 
 ---
 
 ### 제8조 (개인정보처리방침의 변경)
 
 본 개인정보처리방침은 법령, 보안 정책 또는 서비스의 추가·변경에 따라 개정될 수 있습니다. 개정 시에는 각 애플리케이션의 앱 정보 모달(ℹ️) 또는 공통 안내 페이지를 통해 신속히 공지합니다.
+
+---
+---
+
+# Privacy Policy (English Version)
+
+**Effective Date: October 10, 2026**  
+**Last Updated: October 18, 2026**
+
+**아무거나 Studio** ("we", "our", or the "Service") values your privacy and strictly complies with the Personal Information Protection Act and the **Google API Services User Data Policy** (including the Limited Use requirements). This Privacy Policy applies across our entire suite of web applications (**Simple Reader, My Drive Finder, Simple Schedule, Word Smart, Lens Dictionary, Subway Tracker**, etc.).
+
+---
+
+### Article 1 (Information We Collect and How We Collect It)
+
+The Service does not require a separate sign-up process. Instead, we use Google Sign-In (Google OAuth 2.0) to collect and use only the minimum identification information and essential API permissions required to operate the applications.
+
+1. **Basic Authentication & Account Identification (Common to Google OAuth)**
+   * **Collected Data:** Google account email address (`email`), unique account identifier (`Google Sub ID`), and profile picture URL (`profile`).
+   * **Collection Method:** Google OAuth 2.0 authentication and session callback.
+
+2. **Application-Specific Google API Permissions (OAuth Scopes)**
+   We request only the minimum scopes necessary (Least Privilege) to perform each application's core user-facing features:
+   * **Simple Reader (Smart PDF & E-Book Reader):**
+     * **Scope:** Google Drive API (`https://www.googleapis.com/auth/drive.readonly` — Read-only access to Google Drive)
+     * **Purpose:** Browsing PDF files in your designated Google Drive folders, downloading file binaries, and caching them locally in your browser for reading.
+   * **My Drive Finder (Google Drive Spreadsheet & CSV Search):**
+     * **Scope:** Google Drive API (`drive.readonly`, `drive.file` — Read access to Google Drive and access to specific files selected or created via the app)
+     * **Purpose:** Synchronizing spreadsheet/CSV metadata within user-selected folders, downloading files for client-side search, and uploading user-selected files.
+   * **Simple Schedule (Simple Scheduler & Routine PWA):**
+     * **Scope:** Google Calendar API (`https://www.googleapis.com/auth/calendar.events` — Manage calendar events)
+     * **Purpose:** Viewing user calendar events, creating new events, updating/deleting events, and syncing public holiday calendars.
+   * **Word Smart (Vocabulary Study PWA):**
+     * **Scope:** Google Drive API (`https://www.googleapis.com/auth/drive.readonly` — Read-only access to Google Drive)
+     * **Purpose:** Selecting and downloading vocabulary list (CSV) files from Google Drive to the local device.
+
+---
+
+### Article 2 (Purpose of Processing Personal Information)
+
+Collected data is processed strictly for the following purposes and is **never** used for marketing, targeted advertising, or third-party profiling:
+
+1. **User Identification & Cross-Device Synchronization:** Synchronizing notes, bookmarks, vocabulary study history, and calendar events between local storage (`IndexedDB` / `Dexie.js` / `localForage`) and our cloud database (`Supabase`) based on your authenticated Google account identifier.
+2. **Service Proxy Functionality:** Relaying user-requested Google Drive files and processing real-time Google Calendar API requests on behalf of the user.
+3. **Third-Party Integration Credential Storage (Simple Schedule):** Secure server-side isolation and storage of Notion integration tokens and database IDs voluntarily provided by the user.
+
+---
+
+### Article 3 (Data Retention and Deletion Procedures)
+
+In principle, personal data is destroyed without delay once the purpose of collection and use has been achieved.
+
+1. **Retention Period**
+   * **Login Session Tokens:** Session cookies are maintained for up to 180 days and are immediately invalidated upon token expiration or user sign-out.
+   * **Synchronization Metadata (Supabase):** Retained while the user actively uses the Service and permanently deleted without delay upon account deletion or erasure request.
+
+2. **Soft Delete and 30-Day Automatic Permanent Erasure Policy**
+   * When a user deletes notes, bookmarks, study logs, or calendar items, the record is marked with a `deleted_at` timestamp (Soft Delete).
+   * After **30 days**, backend batch schedulers and synchronization routines automatically and permanently purge (Hard Delete) the data from both local storage and the cloud database (`Supabase`) so that it cannot be recovered.
+
+3. **User-Initiated Data Deletion & Account Revocation (Google OAuth Compliance)**
+   Users have full control to view and permanently delete their personal data and stored records at any time:
+   * **Self-Service Deletion Portal & In-App Reset:** You can immediately and permanently delete all records stored in Supabase by clicking the **[데이터 삭제 요청 (Request Data Deletion)]** button on this official landing page or via **[Settings] > [Account Management] > [Reset All Data & Disconnect]** within each app. Note that shared vocabulary lists (`word_lists`) are permanently anonymized (`user_email = 'anonymous'`) to preserve community study compatibility while removing all personal identifiers.
+   * **Identity Verification:** To prevent unauthorized or malicious data destruction by third parties, data deletion is executed only after verifying ownership via **Google OAuth sign-in**.
+   * **Offline Cache Purge:** When you sign out or reset your data, sensitive offline caches remaining in the Service Worker Cache Storage (`Cache API`), `IndexedDB`, and `LocalStorage` are immediately wiped.
+   * **Email Request Channel:** If you cannot access the web UI, you may request data deletion by emailing the Privacy Officer (`doohee2@gmail.com`) with your Google account email address, and your data will be permanently erased upon receipt.
+
+---
+
+### Article 4 (Compliance with Google API Services User Data Policy & Limited Use)
+
+The Service’s use and transfer to any other app of information received from Google APIs will adhere to the **Google API Services User Data Policy**, including the **Limited Use** requirements:
+
+1. **No AI / LLM Model Training:** User data obtained or viewed through Google APIs (Google Drive, Google Calendar) is **never** used to train, fine-tune, or improve generalized external Artificial Intelligence (AI) or Large Language Models (LLMs). The Gemini translation and summarization feature in Simple Reader processes only the specific text snippet explicitly highlighted by the user via a one-off API request and does not store it for model training.
+2. **No Sale or Unauthorized Transfer of Data:** We never sell user data to third parties or transfer it to external platforms unrelated to providing the core functionality of the Service.
+3. **No Human Readership:** Service operators do not access or read the contents of your Google Drive documents or Google Calendar events unless we have your explicit prior consent (e.g., for debugging a support request) or are required to do so by law.
+
+---
+
+### Article 5 (Third-Party Service Providers & Sub-processors)
+
+We do not provide your personal data to third parties, except for entrusting cloud infrastructure operations to the following verified sub-processors to maintain reliable serverless web services:
+
+| Sub-processor | Entrusted Task | Retention Period |
+| :--- | :--- | :--- |
+| **Supabase Inc.** | Cloud database hosting for user identifiers and sync metadata (notes, bookmarks, study logs) | Until service termination or user data deletion request |
+| **Vercel Inc.** | Web application hosting and serverless API route execution | Until termination of hosting service |
+| **Google LLC** | User authentication (Google OAuth 2.0), Google Drive API, and Google Calendar API integration | Subject to Google Terms of Service & Privacy Policy |
+
+---
+
+### Article 6 (Technical and Administrative Security Measures)
+
+We implement a 4-tier security architecture to safeguard your personal information:
+
+1. **Identifier Anonymization & One-Way Hashing:** Where applicable, email identifiers can be isolated using SHA-256 one-way cryptographic hashing combined with a random salt.
+2. **Token & Credential Isolation (Zero-Leak):** Google OAuth tokens and sessions are protected via `HttpOnly, Secure` encrypted cookies inaccessible to client-side scripts, and backend secret keys are strictly isolated from client bundles.
+3. **Server-Side Ownership Authorization & Schema Validation:** All API endpoints enforce zero-trust authorization strictly based on server-side verified sessions (`await auth()`) rather than client parameters, and sanitize error responses.
+4. **Global HTTP Security Headers:** All routes enforce HSTS (HTTPS communication), `X-Frame-Options` (clickjacking protection), Content Security Policy (`CSP`), and `Permissions-Policy`.
+
+---
+
+### Article 7 (Privacy Officer & Contact Information)
+
+For any questions, complaints, or data deletion requests regarding this Privacy Policy, please contact:
+
+* **Developer / Operator:** 아무거나 Studio (`doohee2`)
+* **Email:** `doohee2@gmail.com`
+* **GitHub:** [https://github.com/doohee2](https://github.com/doohee2)
+
+---
+
+### Article 8 (Changes to This Privacy Policy)
+
+This Privacy Policy may be updated to reflect changes in laws, security policies, or service features. Any updates will be promptly announced via this page or the in-app information modal.

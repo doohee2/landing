@@ -49,21 +49,21 @@ export default function TermsPage() {
               <ScrollText className="w-6 h-6" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-white flex items-center gap-2">
-                <span>서비스 이용약관</span>
+              <h1 className="text-xl font-bold text-white flex flex-wrap items-center gap-2">
+                <span>서비스 이용약관 (Terms of Service)</span>
                 <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-300 border border-indigo-500/20">
-                  Terms of Service
+                  KO / EN · Terms of Service
                 </span>
               </h1>
               <p className="text-xs text-slate-400 mt-1">
-                바이브코딩 웹 애플리케이션 제품군 공통 이용약관
+                바이브코딩 웹 애플리케이션 제품군 공통 이용약관 (Korean & English)
               </p>
             </div>
           </div>
 
           <div className="flex items-center gap-2 text-xs font-mono text-slate-400 bg-[#060e20] px-3 py-1.5 rounded-lg border border-white/5">
             <FileText className="w-3.5 h-3.5 text-indigo-400" />
-            <span>최종 개정: 2026. 10. 17</span>
+            <span>최종 개정: 2026. 10. 18</span>
           </div>
         </div>
       </div>
@@ -74,6 +74,11 @@ export default function TermsPage() {
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             components={{
+              blockquote: ({ children }) => (
+                <blockquote className="my-4 px-4 py-3 rounded-xl bg-[#0f172a]/90 border-l-4 border-indigo-500 text-slate-300 text-xs sm:text-sm">
+                  {children}
+                </blockquote>
+              ),
               table: ({ children }) => (
                 <div className="my-6 w-full overflow-x-auto rounded-xl border border-slate-700/80 bg-[#0f172a] shadow-lg">
                   <table className="w-full text-left text-sm text-slate-200 border-collapse">

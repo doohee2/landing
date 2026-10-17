@@ -1,7 +1,10 @@
 # 서비스 이용약관 (Terms of Service)
 
-**시행일자: 2026년 10월 10일**  
-**최종 수정일: 2026년 10월 17일**
+> 💡 **안내 / Notice**: 본 문서는 한국어(Korean)와 영문(English)이 함께 제공됩니다. 영문 버전은 한국어 본문 하단에서 확인하실 수 있습니다.  
+> *(English version of these Terms of Service is provided below the Korean text.)*
+
+**시행일자 (Effective Date): 2026년 10월 10일 (October 10, 2026)**  
+**최종 수정일 (Last Updated): 2026년 10월 18일 (October 18, 2026)**
 
 본 약관은 **아무거나 Studio**(이하 '운영자')가 개발 및 배포하는 웹 애플리케이션 제품군(**Simple Reader, Word Smart, Simple Schedule, My Drive Finder, Lens Dictionary, Subway Tracker** 등, 이하 총칭하여 '서비스')의 이용 조건 및 절차, 이용자와 운영자 간의 권리·의무 및 책임사항을 규정함을 목적으로 합니다.
 
@@ -61,4 +64,72 @@
 
 * **운영자:** 아무거나 Studio (`doohee2`)
 * **이메일:** `doohee2@gmail.com`
+* **GitHub:** [https://github.com/doohee2](https://github.com/doohee2)
+
+---
+---
+
+# Terms of Service (English Version)
+
+**Effective Date: October 10, 2026**  
+**Last Updated: October 18, 2026**
+
+These Terms of Service ("Terms") govern your access to and use of the web application suite (**Simple Reader, Word Smart, Simple Schedule, My Drive Finder, Lens Dictionary, Subway Tracker**, etc., collectively the "Service") developed and operated by **아무거나 Studio** ("Operator", "we", or "us").
+
+---
+
+### Article 1 (Purpose and Nature of the Service)
+
+1. The Service is a collection of **free, public Progressive Web Applications (PWAs)** created as an indie development ("Vibe Coding") project to assist with everyday productivity and learning.
+2. Anyone may use the Service free of charge via a web browser or by adding it to their mobile home screen (PWA), without any paid subscription or separate membership registration.
+
+---
+
+### Article 2 (Account Integration and User Obligations)
+
+1. **Google Account Integration (Google OAuth 2.0)**
+   * Certain applications (`Simple Reader`, `Word Smart`, `Simple Schedule`, `My Drive Finder`) utilize official Google OAuth 2.0 Sign-In for cross-device settings synchronization, Google Drive file viewing, and Google Calendar event integration.
+   * Users must use their own legitimate Google account and must not impersonate others or access the Service through unauthorized means.
+
+2. **Acceptable Use**
+   * Users must comply with applicable laws and these Terms when using the Service.
+   * Any activity that disrupts the normal operation of the Service (such as excessive automated API requests, bot abuse, reverse engineering, or exploiting security vulnerabilities) is strictly prohibited.
+   * Users are solely responsible for the copyright and legality of any documents, files, or content they access or manage through the Service (e.g., via Google Drive integration, vocabulary uploads, or notes).
+
+---
+
+### Article 3 (Intellectual Property and Data Ownership)
+
+1. **Service Intellectual Property:** All rights to the UI design, source code, and logos of the Service belong to the Operator.
+2. **User Data Ownership:** Users retain full ownership of their personal files (PDF, Excel, CSV, etc.), notes, bookmarks, and calendar events accessed or created through the Service.
+3. **Shared Vocabulary & Anonymization Policy:** For vocabulary lists created in `Word Smart` to support the shared learning ecosystem, requesting data deletion will immediately anonymize all personal identifiers (`user_email = 'anonymous'`), permanently severing any link to the individual user.
+4. **Right to Data Deletion:** Users may permanently delete their personal records stored on our servers at any time after verifying their identity via the **[데이터 삭제 요청 (Request Data Deletion)]** feature on this landing page or within each application.
+
+---
+
+### Article 4 (Service Provision, Modification, and Discontinuation)
+
+1. The Service relies on external cloud and third-party free-tier infrastructure, including **Vercel, Supabase, Google APIs, Notion API, and Public Data Portal APIs**.
+2. The Operator reserves the right to modify, suspend, or discontinue all or part of the Service without prior notice under the following circumstances:
+   * Policy changes, free quota exhaustion, or service outages of external infrastructure providers (Vercel, Supabase, Google, etc.)
+   * Difficulties in maintaining continuous updates or operations inherent to an indie software project
+   * Security patches, system maintenance, or critical bug fixes
+
+---
+
+### Article 5 (Disclaimer of Warranties & Limitation of Liability)
+
+1. **Provided "AS-IS":** As free indie software, the Service is provided **"AS-IS"** without any express or implied legal warranties regarding fitness for a particular purpose, data integrity, or uninterrupted availability.
+2. **User Responsibility for Backups:** To prevent data loss caused by browser local cache (`IndexedDB`, `LocalStorage`) resets or external cloud outages, users are responsible for maintaining backups of their important original files and records in their own Google Drive or personal storage.
+3. **Third-Party API & Public Data Accuracy:** Features such as `Subway Tracker` (real-time transit arrival data), AI translations, and dictionary lookups relay data from external API providers. The Operator is not liable for any damages arising from delays or inaccuracies in third-party data.
+
+---
+
+### Article 6 (Changes to Terms and Contact Information)
+
+1. The Operator may revise these Terms within the scope of applicable laws, and any updated Terms will be posted on this page.
+2. For inquiries, bug reports, or rights infringement notices regarding the Service, please contact us via the channels below:
+
+* **Operator:** 아무거나 Studio (`doohee2`)
+* **Email:** `doohee2@gmail.com`
 * **GitHub:** [https://github.com/doohee2](https://github.com/doohee2)
