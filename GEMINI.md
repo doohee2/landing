@@ -1,6 +1,6 @@
 # 🚀 Vibe Coding Showcase & Google OAuth Compliance Landing
 
-> **아무거나 Studio**에서 제작한 바이브코딩 PWA 웹 애플리케이션 제품군을 소개하고, Google OAuth 배포 검수를 충족하기 위한 **통합 개인정보처리방침** 및 **구글 계정 본인 인증 기반 데이터 사전 조회 / 삭제 / 익명화 파이프라인**을 제공하는 공식 랜딩 페이지입니다.
+> **아무거나 Studio**에서 제작한 바이브코딩 PWA 웹 애플리케이션 제품군을 소개하고, Google OAuth 배포 검수를 충족하기 위한 **통합 개인정보처리방침(`/privacy`)**, **서비스 이용약관(`/terms`)** 및 **구글 계정 본인 인증 기반 데이터 사전 조회 / 삭제 / 익명화 파이프라인**을 제공하는 공식 랜딩 페이지입니다.
 
 ---
 
@@ -11,7 +11,7 @@
 - **브랜드 슬로건**: Indie Vibe Lab · 유쾌하고 간결한 인디 소프트웨어를 만들고 배포합니다.
 - **핵심 목적**:
   1. 바이브코딩으로 제작된 6가지 실용 웹 애플리케이션 쇼케이스 제공.
-  2. Google API 서비스 사용자 데이터 정책(Google API Services User Data Policy)을 엄격히 준수하는 **통합 개인정보처리방침** 공시.
+  2. Google API 서비스 사용자 데이터 정책(Google API Services User Data Policy)을 엄격히 준수하는 **통합 개인정보처리방침** 및 **서비스 이용약관** 공시.
   3. 구글 OAuth 검수 통과를 위한 **본인 확인 기반 계정 및 이용 데이터 실시간 사전 조회 및 영구 삭제/익명화 기능** 지원.
 
 ---
@@ -35,7 +35,7 @@
 ## ✨ 3. 핵심 기능 명세 (Key Features)
 
 ### 3.1. 문구 및 메타데이터 중앙 집중 관리 (`config/site.ts`)
-- 사이트 타이틀, 브랜드 소개, 히어로 슬로건, 신뢰 지표, FAQ 질문/답변, 푸터 정보 등을 `config/site.ts` 파일 한 곳에서 일괄 수정 가능.
+- 사이트 타이틀, 브랜드 소개, 히어로 슬로건, 신뢰 지표, 개인정보처리방침·이용약관 링크, FAQ 질문/답변, 푸터 정보 등을 `config/site.ts` 파일 한 곳에서 일괄 수정 가능.
 - 6개 앱의 메타데이터(이름, 카테고리, 설명, URL, 아이콘 경로, 태그, 버전)를 객체 배열로 정의하여 손쉬운 확장 보장.
 
 ### 3.2. 6대 실용 PWA 웹 애플리케이션 쇼케이스
@@ -50,14 +50,17 @@
 
 - 모든 카드는 `framer-motion` 호버 인터랙션과 함께 새 탭(`target="_blank" rel="noopener noreferrer"`)으로 안전하게 연결됩니다.
 
-### 3.3. 개인정보처리방침 동적 마크다운 및 표(Table) 고대비 렌더링 (`/privacy`)
-- `content/privacy-policy.md` 파일을 서버 컴포넌트(`app/privacy/page.tsx`)에서 Node.js `fs.readFileSync`로 읽어와 렌더링.
-- **GFM 표(Table) 완벽 파싱**: `remark-gfm` 플러그인을 탑재하여 제3자 제공 위탁 현황 표를 모바일 반응형 가로 스크롤 카드(`overflow-x-auto rounded-xl`)로 렌더링.
-- **다크 모드 가독성 최적화**: 
-  - 본문 굵은 글씨(`strong`): 선명한 순백색(`text-white font-bold`)
-  - 일반 본문/목록(`p`, `li`): 고명도 슬레이트(`text-slate-200`)
-  - 인라인 코드 토큰: 딥 네이비 배경에 라벤더 인디고(`text-[#c3c0ff]`)
-- 원본 마크다운 문서를 수정하면 코드 수정 없이 즉시 페이지에 반영됩니다.
+### 3.3. 개인정보처리방침(`/privacy`) 및 서비스 이용약관(`/terms`) 마크다운 동적 렌더링
+- **마크다운 원문 기반 관리**:
+  - `content/privacy-policy.md` → 서버 컴포넌트(`app/privacy/page.tsx`)에서 Node.js `fs.readFileSync`로 읽어와 렌더링.
+  - `content/terms-of-service.md` → 서버 컴포넌트(`app/terms/page.tsx`)에서 동일하게 읽어와 렌더링 (무료 공개용 인디 PWA 앱 특성에 맞춘 간결한 6개 조항으로 구성).
+  - 원본 마크다운 문서를 수정하면 코드 수정 없이 즉시 각 페이지에 반영됩니다.
+- **GFM 표(Table) 완벽 파싱 & 다크 모드 가독성 최적화**:
+  - `remark-gfm` 플러그인을 탑재하여 표(Table)를 모바일 반응형 가로 스크롤 카드(`overflow-x-auto rounded-xl`)로 렌더링.
+  - 본문 굵은 글씨(`strong`): 선명한 순백색(`text-white font-bold`), 일반 본문/목록(`p`, `li`): 고명도 슬레이트(`text-slate-200`), 인라인 코드 토큰: 라벤더 인디고(`text-[#c3c0ff]`).
+- **상단·하단 양방향 퀵 내비게이션 & 삭제 모달 자동 오픈**:
+  - `/privacy`와 `/terms` 페이지 모두 상단과 하단 양쪽에 왼쪽에는 **`메인 화면으로 돌아가기` (`/`)**, 오른쪽에는 **`데이터 삭제 요청` (`/?action=delete#deletion-section`)** 바로가기 버튼을 대칭 배치.
+  - `데이터 삭제 요청` 클릭 시 메인 페이지(`app/page.tsx`)가 `?action=delete` 쿼리 파라미터를 감지하여 삭제 안내 섹션으로 스크롤함과 동시에 **데이터 삭제 모달을 자동으로 즉시 오픈**.
 
 ### 3.4. 구글 로그인 기반 개인정보 사전 조회 & 데이터 삭제 파이프라인
 구글 개발자 검수(Verification)를 완벽히 통과하기 위한 다단계 UX 파이프라인을 지원합니다:
@@ -90,11 +93,15 @@ flowchart TD
 4. **삭제 완료 후 조치**:
    - 200 OK 수신 후 브라우저 구글 세션을 자동 로그아웃(`signOut()`) 처리하고 최종 안내 화면 제공.
 
-### 3.5. 상단 GNB 사용자 프로필 & 로그아웃 UI
-- 로그인 완료 시 상단 헤더에 사용자의 **전체 구글 이메일(`font-mono text-xs`)**과 **`[로그아웃]`** 뱃지를 표시.
-- **프로필 이미지 로딩 보장**: Google OAuth 프로필 이미지(`lh3.googleusercontent.com`)가 외부 도메인 Referer 정책으로 인해 차단되는 현상을 방지하기 위해 `referrerPolicy="no-referrer"` 속성을 적용하고, `next.config.ts`의 `images.remotePatterns`에 Google 이미지 도메인을 등록.
-- **원클릭 로그아웃 인터랙션**: 프로필 버튼 클릭 시 즉시 구글 세션을 안전하게 종료(`signOut({ redirect: false })`)하며, 마우스 호버 시 붉은색 로그아웃 아이콘(`LogOut`)과 뱃지가 활성화되어 직관적인 피드백 제공.
-- 데이터 사전 조회 및 삭제는 내비게이션의 `[데이터 삭제]` 버튼, 히어로 섹션 CTA, 모달 전용 퀵 링크를 통해 손쉽게 진입 가능.
+### 3.5. 브랜드 로고 아이콘 & 상단 GNB 사용자 프로필 / 로그아웃 UI
+- **"아무거나 Studio" 전용 브랜드 로고**:
+  - 딥 노터널 인디고 배경에 4개의 모듈형 타일(앱 블록, '아무거나'의 초성 `ㅇ` 링, 바이브 코딩 `<>` 브래킷, 인디고·민트 4각 스파클 별)을 조합한 로고 제작.
+  - 컴포넌트(`components/BrandLogoIcon.tsx`)로 상단 헤더(`Header.tsx`)와 하단 푸터(`Footer.tsx`) 타이틀 옆에 배치.
+  - 정적 에셋으로 벡터 원본(`public/icons/logo.svg`) 및 **512×512px 고해상도 PNG(`public/icons/logo.png`)**를 함께 제공하며, 브라우저 파비콘 및 Apple 터치 아이콘(`app/layout.tsx`)과 Google OAuth 앱 로고 등록에 활용 가능.
+- **사용자 프로필 & 원클릭 로그아웃 인터랙션**:
+  - 로그인 완료 시 상단 헤더에 사용자의 **전체 구글 이메일(`font-mono text-xs`)**과 **`[로그아웃]`** 뱃지를 표시.
+  - **프로필 이미지 로딩 보장**: Google OAuth 프로필 이미지(`lh3.googleusercontent.com`)가 외부 도메인 Referer 정책으로 인해 차단되는 현상을 방지하기 위해 `referrerPolicy="no-referrer"` 속성을 적용하고, `next.config.ts`의 `images.remotePatterns`에 Google 이미지 도메인을 등록.
+  - 프로필 버튼 클릭 시 즉시 구글 세션을 안전하게 종료(`signOut({ redirect: false })`)하며, 마우스 호버 시 붉은색 로그아웃 아이콘(`LogOut`)과 뱃지가 활성화되어 직관적인 피드백 제공.
 
 ---
 
@@ -103,10 +110,12 @@ flowchart TD
 ```text
 landing/
 ├── app/
-│   ├── layout.tsx                # NextAuth SessionProvider 및 Inter/JetBrains Mono 폰트, 메타데이터
-│   ├── page.tsx                  # 메인 랜딩 원페이지 (Hero, Apps, Privacy, Deletion, FAQ, Modal)
+│   ├── layout.tsx                # NextAuth SessionProvider, 폰트, 메타데이터 및 파비콘(logo.svg / logo.png) 설정
+│   ├── page.tsx                  # 메인 랜딩 원페이지 (?action=delete 감지 자동 모달 오픈 지원)
 │   ├── privacy/
-│   │   └── page.tsx              # 개인정보처리방침 전용 뷰 (remark-gfm 표 렌더링 및 고대비 스타일)
+│   │   └── page.tsx              # 개인정보처리방침 전용 뷰 (상·하단 메인 복귀 & 데이터 삭제 요청 바로가기 포함)
+│   ├── terms/
+│   │   └── page.tsx              # 서비스 이용약관 전용 뷰 (상·하단 메인 복귀 & 데이터 삭제 요청 바로가기 포함)
 │   ├── globals.css               # Tailwind CSS v4 테마 토큰 및 @plugin typography 설정
 │   └── api/
 │       ├── auth/[...nextauth]/
@@ -118,25 +127,29 @@ landing/
 │               └── route.ts      # 계정 데이터 영구 삭제 및 익명화 API (현재 DB 쿼리 주석 보존)
 ├── components/
 │   ├── Providers.tsx             # NextAuth SessionProvider 클라이언트 컴포넌트 래퍼
-│   ├── Header.tsx                # 상단 GNB (이메일 전체 표시, 뱃지, 데스크톱/모바일 메뉴, 모달 퀵 링크)
-│   ├── Hero.tsx                  # 앰비언트 글로우, 메인 슬로건, 신뢰 지표 3종 카드
+│   ├── BrandLogoIcon.tsx         # "아무거나 Studio" 브랜드 로고 SVG 아이콘 컴포넌트
+│   ├── Header.tsx                # 상단 GNB (브랜드 로고, 약관/개인정보 링크, 이메일 전체 표시 & 로그아웃 버튼)
+│   ├── Hero.tsx                  # 앰비언트 글로우, 메인 슬로건, 개인정보/이용약관/데이터삭제 CTA, 신뢰 지표 3종
 │   ├── AppCard.tsx               # 개별 앱 카드 컴포넌트 (framer-motion 호버, 아이콘, 외장 링크)
 │   ├── AppGrid.tsx               # 6개 앱 쇼케이스 반응형 그리드
-│   ├── PrivacySummary.tsx        # 메인 페이지용 4대 핵심 정책 요약 카드
+│   ├── PrivacySummary.tsx        # 메인 페이지용 핵심 정책 요약 카드 및 개인정보처리방침/이용약관 전문 링크
 │   ├── DeletionSection.tsx       # 데이터 파기 안내 및 구글 연동 삭제 절차 안내 섹션
 │   ├── DeleteDataModal.tsx       # 구글 로그인 본인 확인, 개인정보 사전 조회 및 삭제/익명화 확인 모달
 │   ├── FAQSection.tsx            # 인터랙티브 아코디언 FAQ 및 이메일 문의 카드
-│   └── Footer.tsx                # 저작권, 개발자 정보(GitHub doohee2), 정책 바로가기 링크
+│   └── Footer.tsx                # 브랜드 로고, 저작권, 개발자 정보(GitHub doohee2), 개인정보/약관/삭제 바로가기
 ├── config/
 │   └── site.ts                   # 모든 문구, 브랜드 메타데이터, 앱 6종 설정을 중앙 관리하는 단일 진실 원천
 ├── content/
-│   └── privacy-policy.md         # Google OAuth 검수 규격 통합 개인정보처리방침 마크다운 원문
+│   ├── privacy-policy.md         # Google OAuth 검수 규격 통합 개인정보처리방침 마크다운 원문
+│   └── terms-of-service.md       # 공개용 인디 웹 앱 제품군 공통 서비스 이용약관 마크다운 원문
 ├── lib/
 │   └── supabase.ts               # 서버 사이드 Supabase 클라이언트 유틸리티
 ├── auth.ts                       # NextAuth v5 설정 (Google Provider, least-privilege scope)
 ├── public/
 │   └── icons/
-│       └── apps/                 # 각 앱의 고화질 PNG 아이콘 에셋
+│       ├── logo.svg              # "아무거나 Studio" 공식 벡터 로고 아이콘
+│       ├── logo.png              # "아무거나 Studio" 512x512 고해상도 PNG 로고 아이콘 (OAuth/PWA 등록용)
+│       └── apps/                 # 각 앱의 512x512 고화질 PNG 아이콘 에셋
 ├── .env.example                  # 프로덕션 배포용 필수 환경 변수 5종 템플릿
 ├── package.json                  # 프로젝트 의존성 및 스크립트 정의
 └── GEMINI.md                     # 본 개발 및 운영 문서
