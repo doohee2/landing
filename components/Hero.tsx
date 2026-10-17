@@ -9,6 +9,7 @@ import {
   Lock,
   LayoutGrid,
   Trash2,
+  ScrollText,
 } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -90,10 +91,17 @@ export function Hero({ onOpenDeleteModal }: HeroProps) {
           </Link>
           <Link
             href="/privacy"
-            className="px-6 py-3 rounded-xl bg-[#171f33] hover:bg-[#222a3d] text-slate-200 font-medium text-sm border border-white/10 transition-all flex items-center gap-2"
+            className="px-5 py-3 rounded-xl bg-[#171f33] hover:bg-[#222a3d] text-slate-200 font-medium text-sm border border-white/10 transition-all flex items-center gap-2"
           >
             <ShieldCheck className="w-4 h-4 text-indigo-400" />
             <span>{siteConfig.hero.ctaPrivacy}</span>
+          </Link>
+          <Link
+            href="/terms"
+            className="px-5 py-3 rounded-xl bg-[#171f33] hover:bg-[#222a3d] text-slate-200 font-medium text-sm border border-white/10 transition-all flex items-center gap-2"
+          >
+            <ScrollText className="w-4 h-4 text-indigo-400" />
+            <span>{siteConfig.hero.ctaTerms}</span>
           </Link>
           <button
             onClick={onOpenDeleteModal}

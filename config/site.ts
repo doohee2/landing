@@ -42,6 +42,7 @@ export const siteConfig = {
   nav: [
     { label: "앱 목록 (Apps)", href: "#apps-section" },
     { label: "개인정보처리방침 (Privacy)", href: "/privacy" },
+    { label: "서비스 약관 (Terms)", href: "/terms" },
     { label: "데이터 삭제 (Data Deletion)", href: "#deletion-section" },
     { label: "FAQ (자주 묻는 질문)", href: "#faq-section" },
   ],
@@ -51,6 +52,7 @@ export const siteConfig = {
     subtitle: "인디 개발과 바이브 코딩으로 일상 속 작은 불편함을 해결하는 유용한 유틸리티 웹 애플리케이션 컬렉션입니다.",
     ctaExplore: "앱 둘러보기",
     ctaPrivacy: "개인정보처리방침 안내",
+    ctaTerms: "서비스 이용약관",
     ctaDelete: "데이터 삭제 요청",
     metrics: [
       {
@@ -61,7 +63,7 @@ export const siteConfig = {
       {
         title: "안전한 구글 OAuth",
         description: "공식 Google OAuth 2.0 프로토콜",
-        iconName: "lock",
+      iconName: "lock",
       },
       {
         title: "투명한 데이터 관리",
@@ -139,10 +141,11 @@ export const siteConfig = {
   },
   privacySummary: {
     badge: "Google OAuth Developer Policy",
-    title: "개인정보처리방침 요약",
-    description: "앱들은 편리하고 일관된 사용자 환경을 위해 구글 OAuth(Google OAuth 2.0)를 지원하며, 구글 개발자 정책에 따른 개인정보처리방침을 투명하고 정직하게 공개합니다.",
+    title: "개인정보처리방침 및 이용약관 요약",
+    description: "앱들은 편리하고 일관된 사용자 환경을 위해 구글 OAuth(Google OAuth 2.0)를 지원하며, 구글 개발자 정책에 따른 개인정보처리방침과 이용약관을 투명하고 정직하게 공개합니다.",
     callout: "사용자의 승인 없이 계정 외 정보를 절대 수집하지 않으며, 구글 보안 표준 프로토콜을 전적으로 준수합니다.",
     viewFullPolicy: "개인정보처리방침 전문 보기",
+    viewTermsPolicy: "서비스 이용약관 전문 보기",
     items: [
       {
         title: "수집 항목",

@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { useSession, signOut } from "next-auth/react";
-import { Menu, X, Trash2, Shield, User, LogOut } from "lucide-react";
+import { Menu, X, Trash2, Shield, User, LogOut, ScrollText } from "lucide-react";
 import { BrandLogoIcon } from "@/components/BrandLogoIcon";
 
 interface HeaderProps {
@@ -49,6 +49,13 @@ export function Header({ onOpenDeleteModal }: HeaderProps) {
           >
             <Shield className="w-3.5 h-3.5 text-indigo-400" />
             <span>개인정보처리방침</span>
+          </Link>
+          <Link
+            href="/terms"
+            className="px-3 py-1.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors flex items-center gap-1.5"
+          >
+            <ScrollText className="w-3.5 h-3.5 text-indigo-400" />
+            <span>서비스 약관</span>
           </Link>
           <button
             onClick={onOpenDeleteModal}
@@ -169,6 +176,14 @@ export function Header({ onOpenDeleteModal }: HeaderProps) {
           >
             <Shield className="w-4 h-4 text-indigo-400" />
             <span>개인정보처리방침 (Privacy)</span>
+          </Link>
+          <Link
+            href="/terms"
+            onClick={() => setMobileMenuOpen(false)}
+            className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors"
+          >
+            <ScrollText className="w-4 h-4 text-indigo-400" />
+            <span>서비스 이용약관 (Terms)</span>
           </Link>
           <button
             onClick={() => {

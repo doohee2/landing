@@ -56,12 +56,19 @@ export function PrivacySummary() {
               </p>
             </div>
 
-            <div className="mt-6">
+            <div className="mt-6 flex flex-col sm:flex-row lg:flex-col gap-3">
               <Link
                 href="/privacy"
                 className="inline-flex items-center gap-2 text-sm font-semibold text-indigo-300 hover:text-indigo-200 group"
               >
                 <span>{siteConfig.privacySummary.viewFullPolicy}</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+              <Link
+                href="/terms"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-slate-300 hover:text-indigo-200 group"
+              >
+                <span>{siteConfig.privacySummary.viewTermsPolicy}</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>

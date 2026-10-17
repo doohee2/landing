@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
-import { Mail, Shield, Trash2 } from "lucide-react";
+import { Mail, Shield, Trash2, ScrollText } from "lucide-react";
 import { BrandLogoIcon } from "@/components/BrandLogoIcon";
 
 function GithubIcon({ className }: { className?: string }) {
@@ -51,6 +51,14 @@ export function Footer({ onOpenDeleteModal }: FooterProps) {
             >
               <Shield className="w-3.5 h-3.5 text-indigo-400" />
               <span>개인정보처리방침</span>
+            </Link>
+            <span className="text-slate-700">·</span>
+            <Link
+              href="/terms"
+              className="hover:text-indigo-300 transition-colors flex items-center gap-1.5"
+            >
+              <ScrollText className="w-3.5 h-3.5 text-indigo-400" />
+              <span>서비스 이용약관</span>
             </Link>
             <span className="text-slate-700">·</span>
             <button
