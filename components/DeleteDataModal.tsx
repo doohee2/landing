@@ -71,10 +71,14 @@ export function DeleteDataModal({ isOpen, onClose }: DeleteDataModalProps) {
       if (res.ok && json.success) {
         setDataSummary(json.summary);
       } else {
-        setSummaryError(json.error || "개인정보 목록을 불러오지 못했습니다.");
+        setSummaryError(
+          json.error || "개인정보 목록을 불러오지 못했습니다. (Failed to load personal data summary.)"
+        );
       }
     } catch {
-      setSummaryError("네트워크 오류로 데이터를 조회할 수 없습니다.");
+      setSummaryError(
+        "네트워크 오류로 데이터를 조회할 수 없습니다. (Network error while fetching data.)"
+      );
     } finally {
       setIsLoadingSummary(false);
     }
@@ -117,20 +121,25 @@ export function DeleteDataModal({ isOpen, onClose }: DeleteDataModalProps) {
       if (res.ok && data.success) {
         setDeletionResult({
           success: true,
-          message: data.message || "모든 데이터가 성공적으로 영구 삭제 및 익명화되었습니다.",
+          message:
+            data.message ||
+            "모든 데이터가 성공적으로 영구 삭제 및 익명화되었습니다. (All personal data has been permanently deleted and anonymized.)",
         });
         // Sign out automatically to clear session
         await signOut({ redirect: false });
       } else {
         setDeletionResult({
           success: false,
-          message: data.error || "데이터 삭제 중 오류가 발생했습니다.",
+          message:
+            data.error ||
+            "데이터 삭제 중 오류가 발생했습니다. (An error occurred while deleting data.)",
         });
       }
     } catch {
       setDeletionResult({
         success: false,
-        message: "네트워크 통신 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.",
+        message:
+          "네트워크 통신 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요. (Network error. Please try again later.)",
       });
     } finally {
       setIsDeleting(false);
@@ -167,10 +176,10 @@ export function DeleteDataModal({ isOpen, onClose }: DeleteDataModalProps) {
                 </div>
                 <div>
                   <h3 className="font-semibold text-slate-100 text-base">
-                    개인정보 조회 및 데이터 영구 삭제
+                    개인정보 조회 및 데이터 영구 삭제 (Data Audit & Deletion)
                   </h3>
                   <span className="text-xs text-slate-400">
-                    Google OAuth 본인 확인 기반 Supabase 실시간 연동
+                    Google OAuth 본인 확인 기반 실시간 연동 · Verified via Google OAuth
                   </span>
                 </div>
               </div>
@@ -194,25 +203,25 @@ export function DeleteDataModal({ isOpen, onClose }: DeleteDataModalProps) {
                         <CheckCircle2 className="w-7 h-7" />
                       </div>
                       <h4 className="text-lg font-bold text-slate-100 mb-2">
-                        개인정보 삭제 및 익명화 완료
+                        개인정보 삭제 및 익명화 완료 (Data Deletion Completed)
                       </h4>
                       <p className="text-sm text-slate-300 leading-relaxed mb-6">
                         {deletionResult.message}
                         <br />
                         <span className="text-xs text-emerald-400 mt-2 block font-medium">
-                          ✓ 독서 기록·학습 이력·노션 토큰 영구 파기 완료
+                          ✓ 독서 기록·학습 이력·노션 토큰 영구 파기 완료 (Reading logs, study history & Notion tokens deleted)
                           <br />
-                          ✓ 공유 단어장 작성자 정보 &apos;anonymous&apos; 마스킹 완료
+                          ✓ 공유 단어장 작성자 정보 &apos;anonymous&apos; 마스킹 완료 (Shared word lists anonymized)
                         </span>
                         <span className="text-xs text-slate-400 mt-2 block">
-                          안전을 위해 구글 연동 세션이 자동 로그아웃되었습니다.
+                          안전을 위해 구글 연동 세션이 자동 로그아웃되었습니다. (Signed out automatically for security.)
                         </span>
                       </p>
                       <button
                         onClick={handleClose}
                         className="w-full py-2.5 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm transition-all shadow-lg shadow-indigo-600/20 cursor-pointer"
                       >
-                        닫기
+                        닫기 (Close)
                       </button>
                     </>
                   ) : (
@@ -221,7 +230,7 @@ export function DeleteDataModal({ isOpen, onClose }: DeleteDataModalProps) {
                         <AlertTriangle className="w-7 h-7" />
                       </div>
                       <h4 className="text-lg font-bold text-slate-100 mb-2">
-                        데이터 삭제 실패
+                        데이터 삭제 실패 (Deletion Failed)
                       </h4>
                       <p className="text-sm text-red-300 leading-relaxed mb-6">
                         {deletionResult.message}
@@ -230,7 +239,7 @@ export function DeleteDataModal({ isOpen, onClose }: DeleteDataModalProps) {
                         onClick={() => setDeletionResult(null)}
                         className="w-full py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium text-sm transition-all cursor-pointer"
                       >
-                        다시 시도하기
+                        다시 시도하기 (Retry)
                       </button>
                     </>
                   )}
@@ -239,7 +248,9 @@ export function DeleteDataModal({ isOpen, onClose }: DeleteDataModalProps) {
                 /* Loading Session State */
                 <div className="py-12 flex flex-col items-center justify-center gap-3">
                   <Loader2 className="w-8 h-8 text-indigo-400 animate-spin" />
-                  <p className="text-sm text-slate-400">세션 정보를 확인하고 있습니다...</p>
+                  <p className="text-sm text-slate-400">
+                    세션 정보를 확인하고 있습니다... (Checking session...)
+                  </p>
                 </div>
               ) : !session || !session.user ? (
                 /* Step 1: Unauthenticated State */
@@ -249,10 +260,14 @@ export function DeleteDataModal({ isOpen, onClose }: DeleteDataModalProps) {
                       <Lock className="w-5 h-5 text-indigo-400 shrink-0 mt-0.5" />
                       <div>
                         <h4 className="text-sm font-semibold text-indigo-200 mb-1">
-                          구글 계정 본인 인증 필요
+                          구글 계정 본인 인증 필요 (Identity Verification Required)
                         </h4>
                         <p className="text-xs text-indigo-200/80 leading-relaxed">
                           타인의 악의적인 데이터 삭제를 방지하고 사용 중인 개인정보를 정확히 조회하기 위해 구글 계정 본인 인증이 필요합니다.
+                          <br />
+                          <span className="text-indigo-300/70">
+                            To prevent unauthorized deletion and review your stored records, please verify account ownership via Google Sign-In.
+                          </span>
                         </p>
                       </div>
                     </div>
@@ -260,6 +275,10 @@ export function DeleteDataModal({ isOpen, onClose }: DeleteDataModalProps) {
 
                   <p className="text-xs text-slate-400 mb-5 leading-relaxed">
                     구글 로그인은 본인 소유권 확인 및 이메일 매칭 목적으로만 최소 기본 프로필(`openid email profile`)만을 요청합니다.
+                    <br />
+                    <span className="text-slate-500">
+                      Only minimal profile scopes (`openid email profile`) are requested to verify ownership.
+                    </span>
                   </p>
 
                   <button
@@ -284,7 +303,7 @@ export function DeleteDataModal({ isOpen, onClose }: DeleteDataModalProps) {
                         fill="#EA4335"
                       />
                     </svg>
-                    <span>Google로 본인 인증하기</span>
+                    <span>Google로 본인 인증하기 (Sign in with Google)</span>
                   </button>
                 </div>
               ) : (
@@ -308,9 +327,9 @@ export function DeleteDataModal({ isOpen, onClose }: DeleteDataModalProps) {
                       )}
                       <div>
                         <div className="text-sm font-semibold text-slate-100 flex items-center gap-1.5">
-                          {session.user.name || "인증된 사용자"}
+                          {session.user.name || "인증된 사용자 (Verified User)"}
                           <span className="text-[10px] px-1.5 py-0.2 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                            본인 인증됨
+                            본인 인증됨 (Verified)
                           </span>
                         </div>
                         <div className="text-xs text-slate-400 font-mono">
@@ -320,7 +339,7 @@ export function DeleteDataModal({ isOpen, onClose }: DeleteDataModalProps) {
                     </div>
                     <button
                       onClick={() => signOut({ redirect: false })}
-                      title="로그아웃"
+                      title="로그아웃 (Sign Out)"
                       className="p-2 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-white/5 transition-colors cursor-pointer"
                     >
                       <LogOut className="w-4 h-4" />
@@ -332,13 +351,13 @@ export function DeleteDataModal({ isOpen, onClose }: DeleteDataModalProps) {
                     <div className="flex items-center gap-2">
                       <Eye className="w-4 h-4 text-indigo-400" />
                       <h4 className="text-sm font-bold text-slate-200">
-                        보유 중인 개인정보 현황 (Supabase 실시간 조회)
+                        보유 중인 개인정보 현황 (Stored Personal Data Summary)
                       </h4>
                     </div>
                     <button
                       onClick={fetchSummary}
                       disabled={isLoadingSummary}
-                      title="새로고침"
+                      title="새로고침 (Refresh)"
                       className="p-1 rounded text-slate-400 hover:text-indigo-300 transition-colors cursor-pointer"
                     >
                       <RefreshCw className={`w-3.5 h-3.5 ${isLoadingSummary ? "animate-spin" : ""}`} />
@@ -349,7 +368,9 @@ export function DeleteDataModal({ isOpen, onClose }: DeleteDataModalProps) {
                   {isLoadingSummary ? (
                     <div className="p-8 rounded-xl bg-[#171f33]/50 border border-white/5 flex flex-col items-center justify-center gap-2 text-slate-400">
                       <Loader2 className="w-6 h-6 animate-spin text-indigo-400" />
-                      <p className="text-xs">데이터베이스에서 사용자 기록을 조회하고 있습니다...</p>
+                      <p className="text-xs">
+                        데이터베이스에서 사용자 기록을 조회하고 있습니다... (Fetching records from database...)
+                      </p>
                     </div>
                   ) : summaryError ? (
                     <div className="p-4 rounded-xl bg-red-950/30 border border-red-500/20 text-xs text-red-300">
@@ -364,25 +385,25 @@ export function DeleteDataModal({ isOpen, onClose }: DeleteDataModalProps) {
                             <BookOpen className="w-4 h-4" />
                           </div>
                           <div>
-                            <div className="flex items-center gap-2">
+                            <div className="flex flex-wrap items-center gap-2">
                               <span className="text-xs font-semibold text-slate-100">
-                                이북 리더기 앱 독서 기록
+                                이북 리더기 독서 기록 (Simple Reader Notes)
                               </span>
                               <span className="text-[10px] px-1.5 py-0.2 rounded bg-red-500/10 text-red-400 border border-red-500/20 font-mono">
-                                [삭제 대상]
+                                [삭제 / Delete]
                               </span>
                             </div>
                             <p className="text-[11px] text-slate-400 mt-0.5 font-mono">
-                              테이블: pdf_metadata (user_id = {session.user.email})
+                              Table: pdf_metadata (user_id = {session.user.email})
                             </p>
                           </div>
                         </div>
-                        <div className="text-right">
+                        <div className="text-right shrink-0">
                           <span className="text-xs font-bold text-slate-200">
-                            총 {dataSummary.pdfReader.total}건
+                            총 {dataSummary.pdfReader.total}건 ({dataSummary.pdfReader.total})
                           </span>
                           <div className="text-[11px] text-slate-400">
-                            메모 {dataSummary.pdfReader.memoCount}개 · 북마크 {dataSummary.pdfReader.bookmarkCount}개
+                            메모(Notes) {dataSummary.pdfReader.memoCount} · 북마크(Bookmarks) {dataSummary.pdfReader.bookmarkCount}
                           </div>
                         </div>
                       </div>
@@ -394,25 +415,25 @@ export function DeleteDataModal({ isOpen, onClose }: DeleteDataModalProps) {
                             <GraduationCap className="w-4 h-4" />
                           </div>
                           <div>
-                            <div className="flex items-center gap-2">
+                            <div className="flex flex-wrap items-center gap-2">
                               <span className="text-xs font-semibold text-slate-100">
-                                단어장 앱 학습 기록
+                                단어장 앱 학습 기록 (Word Smart History)
                               </span>
                               <span className="text-[10px] px-1.5 py-0.2 rounded bg-red-500/10 text-red-400 border border-red-500/20 font-mono">
-                                [삭제 대상]
+                                [삭제 / Delete]
                               </span>
                             </div>
                             <p className="text-[11px] text-slate-400 mt-0.5 font-mono">
-                              테이블: study_history (user_email = {session.user.email})
+                              Table: study_history (user_email = {session.user.email})
                             </p>
                           </div>
                         </div>
-                        <div className="text-right">
+                        <div className="text-right shrink-0">
                           <span className="text-xs font-bold text-slate-200">
-                            {dataSummary.studyHistory.count}건
+                            {dataSummary.studyHistory.count}건 ({dataSummary.studyHistory.count})
                           </span>
                           <div className="text-[11px] text-slate-400">
-                            학습 및 테스트 기록
+                            학습 기록 (Study Logs)
                           </div>
                         </div>
                       </div>
@@ -424,25 +445,25 @@ export function DeleteDataModal({ isOpen, onClose }: DeleteDataModalProps) {
                             <Calendar className="w-4 h-4" />
                           </div>
                           <div>
-                            <div className="flex items-center gap-2">
+                            <div className="flex flex-wrap items-center gap-2">
                               <span className="text-xs font-semibold text-slate-100">
-                                스케줄 앱 노션 토큰
+                                스케줄 앱 노션 토큰 (Simple Schedule Token)
                               </span>
                               <span className="text-[10px] px-1.5 py-0.2 rounded bg-red-500/10 text-red-400 border border-red-500/20 font-mono">
-                                [삭제 대상]
+                                [삭제 / Delete]
                               </span>
                             </div>
                             <p className="text-[11px] text-slate-400 mt-0.5 font-mono">
-                              테이블: user_notion_tokens (user_email = {session.user.email})
+                              Table: user_notion_tokens (user_email = {session.user.email})
                             </p>
                           </div>
                         </div>
-                        <div className="text-right">
+                        <div className="text-right shrink-0">
                           <span className={`text-xs font-bold ${dataSummary.notionToken.hasToken ? "text-amber-400" : "text-slate-400"}`}>
-                            {dataSummary.notionToken.hasToken ? "토큰 등록됨 (1건)" : "미등록 (0건)"}
+                            {dataSummary.notionToken.hasToken ? "등록됨 (Saved: 1)" : "미등록 (None: 0)"}
                           </span>
                           <div className="text-[11px] text-slate-400">
-                            연동 토큰 저장 여부
+                            노션 토큰 (Notion Token)
                           </div>
                         </div>
                       </div>
@@ -454,16 +475,16 @@ export function DeleteDataModal({ isOpen, onClose }: DeleteDataModalProps) {
                             <Layers className="w-4 h-4" />
                           </div>
                           <div>
-                            <div className="flex items-center gap-2">
+                            <div className="flex flex-wrap items-center gap-2">
                               <span className="text-xs font-semibold text-slate-100">
-                                단어장 앱 단어 목록
+                                단어장 앱 단어 목록 (Shared Word Lists)
                               </span>
                               <span className="text-[10px] px-1.5 py-0.2 rounded bg-indigo-500/10 text-[#c3c0ff] border border-indigo-500/20 font-mono">
-                                [익명화 대상]
+                                [익명화 / Anonymize]
                               </span>
                             </div>
                             <p className="text-[11px] text-slate-400 mt-0.5 font-mono">
-                              테이블: word_lists (user_email → &apos;anonymous&apos;로 변경)
+                              Table: word_lists (user_email → &apos;anonymous&apos;)
                             </p>
                             {dataSummary.wordLists.titles.length > 0 && (
                               <div className="flex flex-wrap gap-1 mt-2">
@@ -474,7 +495,7 @@ export function DeleteDataModal({ isOpen, onClose }: DeleteDataModalProps) {
                                 ))}
                                 {dataSummary.wordLists.titles.length > 3 && (
                                   <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#222a3d] text-slate-400">
-                                    +{dataSummary.wordLists.titles.length - 3}개 더보기
+                                    +{dataSummary.wordLists.titles.length - 3} more
                                   </span>
                                 )}
                               </div>
@@ -483,10 +504,10 @@ export function DeleteDataModal({ isOpen, onClose }: DeleteDataModalProps) {
                         </div>
                         <div className="text-right shrink-0">
                           <span className="text-xs font-bold text-[#c3c0ff]">
-                            {dataSummary.wordLists.count}개 단어장
+                            {dataSummary.wordLists.count}개 ({dataSummary.wordLists.count} lists)
                           </span>
                           <div className="text-[10px] text-slate-400">
-                            익명화 처리 예정
+                            익명화 예정 (To Anonymize)
                           </div>
                         </div>
                       </div>
@@ -499,10 +520,14 @@ export function DeleteDataModal({ isOpen, onClose }: DeleteDataModalProps) {
                       <AlertTriangle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
                       <div>
                         <h4 className="text-xs font-bold text-red-200">
-                          데이터 영구 파기 및 익명화 안내
+                          데이터 영구 파기 및 익명화 안내 (Permanent Deletion & Anonymization Warning)
                         </h4>
                         <p className="text-[11px] text-red-200/90 leading-relaxed mt-0.5">
                           본 작업을 진행하면 위의 <strong>독서 기록, 학습 이력, 노션 토큰</strong>은 복구 불가능하게 물리적으로 삭제되며, <strong>단어 목록</strong>은 계정 식별자가 &apos;anonymous&apos;로 전환됩니다.
+                          <br />
+                          <span className="text-red-300/75">
+                            Proceeding will permanently delete your reading notes, study history, and Notion tokens, and anonymize your shared word lists (&apos;anonymous&apos;). This action cannot be undone.
+                          </span>
                         </p>
                       </div>
                     </div>
@@ -515,7 +540,7 @@ export function DeleteDataModal({ isOpen, onClose }: DeleteDataModalProps) {
                       disabled={isDeleting}
                       className="flex-1 py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium text-xs transition-all disabled:opacity-50 cursor-pointer"
                     >
-                      취소
+                      취소 (Cancel)
                     </button>
                     <button
                       onClick={handleDeleteData}
@@ -525,12 +550,12 @@ export function DeleteDataModal({ isOpen, onClose }: DeleteDataModalProps) {
                       {isDeleting ? (
                         <>
                           <Loader2 className="w-4 h-4 animate-spin" />
-                          <span>파기 및 익명화 진행 중...</span>
+                          <span>삭제 진행 중... (Deleting...)</span>
                         </>
                       ) : (
                         <>
                           <Trash2 className="w-4 h-4" />
-                          <span>모든 데이터 영구 삭제</span>
+                          <span>모든 데이터 영구 삭제 (Delete All Data)</span>
                         </>
                       )}
                     </button>

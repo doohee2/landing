@@ -50,7 +50,7 @@ export function Footer({ onOpenDeleteModal }: FooterProps) {
               className="hover:text-indigo-300 transition-colors flex items-center gap-1.5"
             >
               <Shield className="w-3.5 h-3.5 text-indigo-400" />
-              <span>개인정보처리방침</span>
+              <span>개인정보처리방침 (Privacy Policy)</span>
             </Link>
             <span className="text-slate-700">·</span>
             <Link
@@ -58,7 +58,7 @@ export function Footer({ onOpenDeleteModal }: FooterProps) {
               className="hover:text-indigo-300 transition-colors flex items-center gap-1.5"
             >
               <ScrollText className="w-3.5 h-3.5 text-indigo-400" />
-              <span>서비스 이용약관</span>
+              <span>서비스 이용약관 (Terms of Service)</span>
             </Link>
             <span className="text-slate-700">·</span>
             <button
@@ -66,7 +66,7 @@ export function Footer({ onOpenDeleteModal }: FooterProps) {
               className="hover:text-red-400 transition-colors flex items-center gap-1.5 cursor-pointer"
             >
               <Trash2 className="w-3.5 h-3.5 text-red-400" />
-              <span>데이터 삭제 요청</span>
+              <span>데이터 삭제 요청 (Delete Data)</span>
             </button>
             <span className="text-slate-700">·</span>
             <a

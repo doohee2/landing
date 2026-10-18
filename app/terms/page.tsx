@@ -31,7 +31,7 @@ export default function TermsPage() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#171f33] hover:bg-[#222a3d] text-indigo-300 hover:text-white border border-white/5 transition-all text-xs font-semibold group cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-            <span>메인 화면으로 돌아가기</span>
+            <span>메인 화면으로 돌아가기 (Back to Home)</span>
           </Link>
 
           <Link
@@ -39,7 +39,7 @@ export default function TermsPage() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#171f33] hover:bg-red-950/40 text-red-300 hover:text-red-200 border border-red-500/20 hover:border-red-500/40 transition-all text-xs font-semibold group cursor-pointer"
           >
             <Trash2 className="w-4 h-4 text-red-400 group-hover:scale-110 transition-transform" />
-            <span>데이터 삭제 요청</span>
+            <span>데이터 삭제 요청 (Delete Data)</span>
           </Link>
         </div>
 
@@ -181,7 +181,7 @@ export default function TermsPage() {
           className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#171f33] hover:bg-[#222a3d] text-indigo-300 hover:text-white border border-white/5 transition-all text-xs font-semibold group cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-          <span>메인 화면으로 돌아가기</span>
+          <span>메인 화면으로 돌아가기 (Back to Home)</span>
         </Link>
 
         <Link
@@ -189,7 +189,7 @@ export default function TermsPage() {
           className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#171f33] hover:bg-red-950/40 text-red-300 hover:text-red-200 border border-red-500/20 hover:border-red-500/40 transition-all text-xs font-semibold group cursor-pointer"
         >
           <Trash2 className="w-4 h-4 text-red-400 group-hover:scale-110 transition-transform" />
-          <span>데이터 삭제 요청</span>
+          <span>데이터 삭제 요청 (Delete Data)</span>
         </Link>
       </div>
     </div>

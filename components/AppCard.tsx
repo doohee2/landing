@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { AppItem } from "@/config/site";
+import { AppItem, siteConfig } from "@/config/site";
 import Image from "next/image";
 import { ExternalLink } from "lucide-react";
 import { motion } from "framer-motion";
@@ -42,9 +42,14 @@ export function AppCard({ app, index }: AppCardProps) {
         <h3 className="mt-5 text-xl font-bold text-slate-100 group-hover:text-indigo-200 transition-colors">
           {app.name}
         </h3>
-        <p className="mt-2 text-sm text-slate-300/80 leading-relaxed min-h-[44px]">
+        <p className="mt-2 text-sm text-slate-200 leading-relaxed">
           {app.description}
         </p>
+        {app.descriptionEn && (
+          <p className="mt-1 text-xs text-slate-400 leading-relaxed">
+            {app.descriptionEn}
+          </p>
+        )}
 
         {/* Tags */}
         <div className="mt-4 flex flex-wrap gap-1.5">
@@ -60,17 +65,17 @@ export function AppCard({ app, index }: AppCardProps) {
       </div>
 
       {/* Footer: Version & Action Link */}
-      <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
-        <span className="font-mono text-xs text-slate-400">
+      <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between gap-2">
+        <span className="font-mono text-xs text-slate-400 truncate">
           {app.version}
         </span>
         <a
           href={app.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="px-3 py-1.5 rounded-lg bg-[#222a3d] hover:bg-indigo-600 text-slate-200 hover:text-white font-medium text-xs transition-colors flex items-center gap-1.5 shadow-sm"
+          className="px-3 py-1.5 rounded-lg bg-[#222a3d] hover:bg-indigo-600 text-slate-200 hover:text-white font-medium text-xs transition-colors flex items-center gap-1.5 shadow-sm shrink-0"
         >
-          <span>실행하기</span>
+          <span>{siteConfig.apps.launchButton}</span>
           <ExternalLink className="w-3.5 h-3.5" />
         </a>
       </div>

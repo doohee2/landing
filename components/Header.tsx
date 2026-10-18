@@ -48,21 +48,21 @@ export function Header({ onOpenDeleteModal }: HeaderProps) {
             className="px-3 py-1.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors flex items-center gap-1.5"
           >
             <Shield className="w-3.5 h-3.5 text-indigo-400" />
-            <span>개인정보처리방침</span>
+            <span>개인정보처리방침 (Privacy)</span>
           </Link>
           <Link
             href="/terms"
             className="px-3 py-1.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors flex items-center gap-1.5"
           >
             <ScrollText className="w-3.5 h-3.5 text-indigo-400" />
-            <span>서비스 약관</span>
+            <span>서비스 약관 (Terms)</span>
           </Link>
           <button
             onClick={onOpenDeleteModal}
             className="px-3 py-1.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors flex items-center gap-1.5 cursor-pointer"
           >
             <Trash2 className="w-3.5 h-3.5 text-red-400" />
-            <span>데이터 삭제</span>
+            <span>데이터 삭제 (Delete Data)</span>
           </button>
           <Link
             href="#faq-section"
@@ -77,7 +77,7 @@ export function Header({ onOpenDeleteModal }: HeaderProps) {
           {session?.user ? (
             <button
               onClick={handleSignOut}
-              title={`${session.user.email || "사용자"} (클릭 시 로그아웃)`}
+              title={`${session.user.email || "사용자"} (클릭 시 로그아웃 / Click to Sign Out)`}
               className="flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-[#171f33] hover:bg-red-950/30 border border-indigo-500/30 hover:border-red-500/40 transition-all text-xs text-slate-200 shadow-sm cursor-pointer group"
             >
               {session.user.image ? (
@@ -99,7 +99,7 @@ export function Header({ onOpenDeleteModal }: HeaderProps) {
                 </span>
                 <span className="hidden sm:inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-red-500/10 text-red-300 border border-red-500/20 text-[10px] font-medium group-hover:bg-red-500/20 transition-colors whitespace-nowrap">
                   <LogOut className="w-3 h-3 text-red-400" />
-                  <span>로그아웃</span>
+                  <span>로그아웃 (Sign Out)</span>
                 </span>
               </div>
             </button>
@@ -109,7 +109,7 @@ export function Header({ onOpenDeleteModal }: HeaderProps) {
               className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#171f33] hover:bg-[#222a3d] text-indigo-200 text-xs font-medium border border-indigo-500/20 transition-colors cursor-pointer"
             >
               <User className="w-3.5 h-3.5 text-indigo-400" />
-              <span>본인 인증 / 데이터 관리</span>
+              <span>본인 인증 / 데이터 관리 (Manage Data)</span>
             </button>
           )}
 

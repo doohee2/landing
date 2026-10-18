@@ -65,15 +65,29 @@ export function Hero({ onOpenDeleteModal }: HeroProps) {
           앱들을 만나보세요
         </motion.h1>
 
-        {/* Subtitle */}
         <motion.p
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-5 text-base sm:text-lg md:text-xl text-slate-300/90 max-w-2xl leading-relaxed"
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="mt-3 text-sm sm:text-base font-mono text-indigo-300/90 tracking-wide"
         >
-          {siteConfig.hero.subtitle}
+          {siteConfig.hero.titleEn}
         </motion.p>
+
+        {/* Subtitle */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mt-4 max-w-2xl space-y-1.5"
+        >
+          <p className="text-base sm:text-lg text-slate-200 leading-relaxed">
+            {siteConfig.hero.subtitle}
+          </p>
+          <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
+            {siteConfig.hero.subtitleEn}
+          </p>
+        </motion.div>
 
         {/* Action Buttons */}
         <motion.div
