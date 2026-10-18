@@ -42,11 +42,18 @@ export function FAQSection() {
                 onClick={() => toggleAccordion(idx)}
                 className="w-full p-6 text-left flex items-center justify-between gap-4 text-base font-semibold text-slate-100 hover:text-indigo-200 transition-colors cursor-pointer"
               >
-                <span className="flex items-center gap-3.5">
-                  <span className="w-8 h-8 rounded-lg bg-[#222a3d] text-[#c3c0ff] border border-white/5 flex items-center justify-center font-mono text-xs font-bold shrink-0">
+                <span className="flex items-start gap-3.5">
+                  <span className="w-8 h-8 rounded-lg bg-[#222a3d] text-[#c3c0ff] border border-white/5 flex items-center justify-center font-mono text-xs font-bold shrink-0 mt-0.5">
                     Q{idx + 1}
                   </span>
-                  <span>{item.question}</span>
+                  <span className="flex flex-col">
+                    <span>{item.question}</span>
+                    {item.questionEn && (
+                      <span className="text-xs font-normal text-slate-400 mt-0.5">
+                        {item.questionEn}
+                      </span>
+                    )}
+                  </span>
                 </span>
                 <ChevronDown
                   className={`w-5 h-5 text-slate-400 transition-transform duration-300 shrink-0 ${
@@ -65,8 +72,13 @@ export function FAQSection() {
                     className="overflow-hidden"
                   >
                     <div className="px-6 pb-6 pt-0 text-sm text-slate-300 leading-relaxed">
-                      <div className="p-4 rounded-xl bg-[#222a3d]/70 border border-white/5">
-                        {item.answer}
+                      <div className="p-4 rounded-xl bg-[#222a3d]/70 border border-white/5 space-y-2.5">
+                        <p className="text-slate-200">{item.answer}</p>
+                        {item.answerEn && (
+                          <p className="text-xs text-slate-400 pt-2 border-t border-white/5 leading-relaxed">
+                            {item.answerEn}
+                          </p>
+                        )}
                       </div>
                     </div>
                   </motion.div>

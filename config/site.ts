@@ -25,7 +25,9 @@ export interface PrivacyItem {
 
 export interface FaqItem {
   question: string;
+  questionEn?: string;
   answer: string;
+  answerEn?: string;
 }
 
 export const siteConfig = {
@@ -218,31 +220,45 @@ export const siteConfig = {
     items: [
       {
         question: "구글 계정 로그인이 되지 않고 잘못된 접근으로 나옵니다.",
+        questionEn: "Why can't I sign in with my Google account?",
         answer: "현재 각 앱들은 테스트 용도로 등록된 이메일들에 대해서만 로그인이 가능하므로, 일부 앱들은 기능의 제한이 있습니다. 구글 OAuth 배포 심사 이후에 모든 구글 사용자가 이용가능합니다.",
+        answerEn: "Currently, some apps are in testing mode and only accessible to registered test users. Once Google OAuth verification is completed, all Google users will be able to sign in freely.",
       },
       {
         question: "모바일 PWA 앱이 무엇이죠? 왜 따로 등록해서 사용해야 하나요?",
+        questionEn: "What is a mobile PWA, and why is installing it recommended?",
         answer: "Progressive Web App(PWA)는 웹 기반으로 사용자가 스마트폰이나 PC에 설치해 네이티브 앱처럼 사용할 수 있는 애플리케이션입니다. 로컬 데이터의 안전한 관리와 사용자 편의를 위해 브라우저의 '홈 화면에 추가' 기능을 이용해 PWA 앱으로 등록 사용을 권장합니다.",
+        answerEn: "A Progressive Web App (PWA) can be installed directly from your browser onto your phone or PC like a native app. We recommend using 'Add to Home Screen' for safer local cache management and better convenience.",
       },
       {
         question: "서비스는 어떤 인프라 환경에서 서비스가 제공되는 건가요?",
+        questionEn: "What cloud infrastructure powers these services?",
         answer: "각 앱 서비스는 모두 Next.js 서버리스 인프라 Vercel, 오픈소스 데이터베이스 Supabase 등의 무료 인프라를 이용해 제공됩니다. 따라서 추후 해당 업체의 정책 변경 시 서비스 제공 범위가 변동될 수 있습니다.",
+        answerEn: "All apps run on free-tier cloud infrastructure including Vercel (Next.js serverless hosting) and Supabase (database). Service availability may change if these providers update their policies.",
       },
       {
         question: "앱들은 계속 유지보수 개발이 되는 건가요?",
+        questionEn: "Will these apps continue to be maintained and updated?",
         answer: "현재 안정적으로 기능이 제공되고 있으나, 바이브 코딩 및 인디 프로젝트 특성상 추후 기능 추가나 지속적인 업데이트 개선을 공식 약속할 수는 없습니다. 하지만 중요한 버그 수정과 API 변경에 대응하는 유지보수는 모니터링하여 대응하고 있습니다.",
+        answerEn: "As an indie Vibe Coding project, we cannot guarantee regular feature expansions, but we actively monitor and maintain the apps for critical bug fixes and API updates.",
       },
       {
         question: "개인정보는 안전한가요?",
+        questionEn: "Is my personal information safe?",
         answer: "구글 계정 연동은 안전한 Google 공식 OAuth 2.0 인증을 통해 사용자 구분을 위해서만 사용되며, 주민등록번호, 비밀번호 등 민감한 개인정보는 일체 수집하거나 서버에 저장하지 않습니다. 자세한 사항은 상단의 개인정보처리방침을 참고해 주세요.",
+        answerEn: "We only use official Google OAuth 2.0 for user identification and never collect or store sensitive data such as passwords. Please refer to our Privacy Policy for full details.",
       },
       {
         question: "구글 드라이브 파일 읽기, 쓰기 권한은 왜 필요한가요?",
+        questionEn: "Why do some apps request Google Drive read/write permissions?",
         answer: "'Simple Reader', 'Word Smart', 'My Drive Finder'는 사용자가 선택한 PDF 파일, 단어장 파일 등의 열람 및 로컬 캐싱을 위해 읽기 권한(Scope: auth/drive.readonly)을, 'My Drive Finder'는 추가로 파일 수동 업로드를 위해 최소한의 읽기/쓰기 권한(Scope: auth/drive.file)을 클라이언트 브라우저 세션 내에서만 요청합니다. 두 앱 모두 사용자 동의 없이 외부 서버로 파일 원본이나 내용을 전송하지 않습니다.",
+        answerEn: "'Simple Reader', 'Word Smart', and 'My Drive Finder' request read-only access (drive.readonly) to load and cache your selected PDF or vocabulary files locally, and 'My Drive Finder' requests file-level access (drive.file) for manual uploads. No file contents are ever transmitted to external servers without consent.",
       },
       {
-        question: "Is Korean the only supported language? 한글 외 외국어 지원은 불가능한가요?",
-        answer: "We provide bilingual (Korean & English) support on this official landing page, Privacy Policy, Terms of Service, and Data Deletion Portal. However, individual app interfaces are primarily designed in Korean.",
+        question: "한글 외 외국어 지원은 어떻게 되나요?",
+        questionEn: "Is Korean the only supported language?",
+        answer: "본 공식 랜딩 페이지와 개인정보처리방침, 서비스 이용약관, 데이터 삭제 포털은 한영 병기(Korean & English)를 지원합니다. 다만 개별 웹 앱 내부 인터페이스는 한국어 위주로 제공됩니다.",
+        answerEn: "We provide bilingual (Korean & English) support on this official landing page, Privacy Policy, Terms of Service, and Data Deletion Portal. However, individual app interfaces are primarily in Korean.",
       },
     ] as FaqItem[],
     supportTitle: "더 궁금한 점이 있으신가요? (Need More Help?)",
