@@ -545,24 +545,37 @@ export function DeleteDataModal({ isOpen, onClose }: DeleteDataModalProps) {
                     <button
                       onClick={handleClose}
                       disabled={isDeleting}
-                      className="flex-1 py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium text-xs transition-all disabled:opacity-50 cursor-pointer"
+                      className="flex-1 py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 transition-all flex flex-col items-center justify-center leading-tight disabled:opacity-50 cursor-pointer"
                     >
-                      취소 (Cancel)
+                      <span className="font-semibold text-xs">취소</span>
+                      <span className="font-mono text-[10px] text-slate-400 mt-0.5">
+                        Cancel
+                      </span>
                     </button>
                     <button
                       onClick={handleDeleteData}
                       disabled={isDeleting}
-                      className="flex-1 py-3 px-4 rounded-xl bg-red-600 hover:bg-red-500 text-white font-semibold text-xs transition-all shadow-lg shadow-red-600/30 flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer"
+                      className="flex-1 py-2.5 px-4 rounded-xl bg-red-600 hover:bg-red-500 text-white transition-all shadow-lg shadow-red-600/30 flex items-center justify-center gap-2.5 disabled:opacity-50 cursor-pointer"
                     >
                       {isDeleting ? (
                         <>
-                          <Loader2 className="w-4 h-4 animate-spin" />
-                          <span>삭제 진행 중... (Deleting...)</span>
+                          <Loader2 className="w-4 h-4 animate-spin shrink-0" />
+                          <span className="flex flex-col items-start leading-tight text-left">
+                            <span className="font-semibold text-xs">삭제 진행 중...</span>
+                            <span className="font-mono text-[10px] text-red-100/80 mt-0.5">
+                              Deleting...
+                            </span>
+                          </span>
                         </>
                       ) : (
                         <>
-                          <Trash2 className="w-4 h-4" />
-                          <span>모든 데이터 영구 삭제 (Delete All Data)</span>
+                          <Trash2 className="w-4 h-4 shrink-0" />
+                          <span className="flex flex-col items-start leading-tight text-left">
+                            <span className="font-semibold text-xs">모든 데이터 영구 삭제</span>
+                            <span className="font-mono text-[10px] text-red-100/85 mt-0.5">
+                              Delete All Data
+                            </span>
+                          </span>
                         </>
                       )}
                     </button>
