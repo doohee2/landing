@@ -214,7 +214,8 @@ export const siteConfig = {
         "보유 데이터 조회 및 파기 진행 (Review data & confirm deletion)",
         "즉시 파기 결과 확인 (Verify immediate erasure result)",
       ],
-      buttonText: "Google 계정으로 데이터 삭제 요청 (Request Data Deletion)",
+      buttonText: "Google 계정으로 데이터 삭제 요청",
+      buttonTextEn: "Request Data Deletion with Google",
     },
   },
   faq: {
