@@ -39,36 +39,47 @@ export function Header({ onOpenDeleteModal }: HeaderProps) {
         <nav className="hidden lg:flex items-center gap-1.5 xl:gap-3">
           <Link
             href="#apps-section"
-            className="px-3 py-1.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors"
+            className="px-3 py-1 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition-colors flex flex-col items-center text-center leading-tight"
           >
-            앱 목록 (Apps)
+            <span className="text-xs font-semibold">앱 목록</span>
+            <span className="text-[10px] font-mono text-slate-400">Apps</span>
           </Link>
           <Link
             href="/privacy"
-            className="px-3 py-1.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors flex items-center gap-1.5"
+            className="px-3 py-1 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition-colors flex items-center gap-1.5"
           >
-            <Shield className="w-3.5 h-3.5 text-indigo-400" />
-            <span>개인정보처리방침 (Privacy)</span>
+            <Shield className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
+            <span className="flex flex-col items-start leading-tight">
+              <span className="text-xs font-semibold">개인정보처리방침</span>
+              <span className="text-[10px] font-mono text-slate-400">Privacy Policy</span>
+            </span>
           </Link>
           <Link
             href="/terms"
-            className="px-3 py-1.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors flex items-center gap-1.5"
+            className="px-3 py-1 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition-colors flex items-center gap-1.5"
           >
-            <ScrollText className="w-3.5 h-3.5 text-indigo-400" />
-            <span>서비스 약관 (Terms)</span>
+            <ScrollText className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
+            <span className="flex flex-col items-start leading-tight">
+              <span className="text-xs font-semibold">서비스 약관</span>
+              <span className="text-[10px] font-mono text-slate-400">Terms of Service</span>
+            </span>
           </Link>
           <button
             onClick={onOpenDeleteModal}
-            className="px-3 py-1.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors flex items-center gap-1.5 cursor-pointer"
+            className="px-3 py-1 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition-colors flex items-center gap-1.5 cursor-pointer"
           >
-            <Trash2 className="w-3.5 h-3.5 text-red-400" />
-            <span>데이터 삭제 (Delete Data)</span>
+            <Trash2 className="w-3.5 h-3.5 text-red-400 shrink-0" />
+            <span className="flex flex-col items-start leading-tight text-left">
+              <span className="text-xs font-semibold">데이터 삭제</span>
+              <span className="text-[10px] font-mono text-slate-400">Delete Data</span>
+            </span>
           </button>
           <Link
             href="#faq-section"
-            className="px-3 py-1.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors"
+            className="px-3 py-1 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition-colors flex flex-col items-center text-center leading-tight"
           >
-            FAQ
+            <span className="text-xs font-semibold">자주 묻는 질문</span>
+            <span className="text-[10px] font-mono text-slate-400">FAQ</span>
           </Link>
         </nav>
 
@@ -78,7 +89,7 @@ export function Header({ onOpenDeleteModal }: HeaderProps) {
             <button
               onClick={handleSignOut}
               title={`${session.user.email || "사용자"} (클릭 시 로그아웃 / Click to Sign Out)`}
-              className="flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-[#171f33] hover:bg-red-950/30 border border-indigo-500/30 hover:border-red-500/40 transition-all text-xs text-slate-200 shadow-sm cursor-pointer group"
+              className="flex items-center gap-2.5 px-3 py-1 rounded-xl bg-[#171f33] hover:bg-red-950/30 border border-indigo-500/30 hover:border-red-500/40 transition-all text-xs text-slate-200 shadow-sm cursor-pointer group"
             >
               {session.user.image ? (
                 // eslint-disable-next-line @next/next/no-img-element
@@ -97,19 +108,25 @@ export function Header({ onOpenDeleteModal }: HeaderProps) {
                 <span className="font-mono text-xs text-slate-200 group-hover:text-red-200 transition-colors">
                   {session.user.email}
                 </span>
-                <span className="hidden sm:inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-red-500/10 text-red-300 border border-red-500/20 text-[10px] font-medium group-hover:bg-red-500/20 transition-colors whitespace-nowrap">
-                  <LogOut className="w-3 h-3 text-red-400" />
-                  <span>로그아웃 (Sign Out)</span>
+                <span className="hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-red-500/10 text-red-300 border border-red-500/20 font-medium group-hover:bg-red-500/20 transition-colors whitespace-nowrap">
+                  <LogOut className="w-3 h-3 text-red-400 shrink-0" />
+                  <span className="flex flex-col items-start leading-tight">
+                    <span className="text-[10px] font-semibold">로그아웃</span>
+                    <span className="text-[9px] font-mono text-red-300/80">Sign Out</span>
+                  </span>
                 </span>
               </div>
             </button>
           ) : (
             <button
               onClick={onOpenDeleteModal}
-              className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#171f33] hover:bg-[#222a3d] text-indigo-200 text-xs font-medium border border-indigo-500/20 transition-colors cursor-pointer"
+              className="hidden sm:flex items-center gap-2 px-3 py-1 rounded-lg bg-[#171f33] hover:bg-[#222a3d] text-indigo-200 border border-indigo-500/20 transition-colors cursor-pointer"
             >
-              <User className="w-3.5 h-3.5 text-indigo-400" />
-              <span>본인 인증 / 데이터 관리 (Manage Data)</span>
+              <User className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
+              <span className="flex flex-col items-start leading-tight text-left">
+                <span className="text-xs font-semibold">본인 인증 / 데이터 관리</span>
+                <span className="text-[10px] font-mono text-indigo-300/80">Verify & Manage Data</span>
+              </span>
             </button>
           )}
 
@@ -165,42 +182,53 @@ export function Header({ onOpenDeleteModal }: HeaderProps) {
           <Link
             href="#apps-section"
             onClick={() => setMobileMenuOpen(false)}
-            className="block px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors"
+            className="flex flex-col px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition-colors leading-tight"
           >
-            앱 목록 (Apps)
+            <span className="text-sm font-medium">앱 목록</span>
+            <span className="text-xs font-mono text-slate-400 mt-0.5">Apps</span>
           </Link>
           <Link
             href="/privacy"
             onClick={() => setMobileMenuOpen(false)}
-            className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors"
+            className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition-colors"
           >
-            <Shield className="w-4 h-4 text-indigo-400" />
-            <span>개인정보처리방침 (Privacy)</span>
+            <Shield className="w-4 h-4 text-indigo-400 shrink-0" />
+            <span className="flex flex-col leading-tight">
+              <span className="text-sm font-medium">개인정보처리방침</span>
+              <span className="text-xs font-mono text-slate-400 mt-0.5">Privacy Policy</span>
+            </span>
           </Link>
           <Link
             href="/terms"
             onClick={() => setMobileMenuOpen(false)}
-            className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors"
+            className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition-colors"
           >
-            <ScrollText className="w-4 h-4 text-indigo-400" />
-            <span>서비스 이용약관 (Terms)</span>
+            <ScrollText className="w-4 h-4 text-indigo-400 shrink-0" />
+            <span className="flex flex-col leading-tight">
+              <span className="text-sm font-medium">서비스 이용약관</span>
+              <span className="text-xs font-mono text-slate-400 mt-0.5">Terms of Service</span>
+            </span>
           </Link>
           <button
             onClick={() => {
               setMobileMenuOpen(false);
               onOpenDeleteModal();
             }}
-            className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-red-300 hover:bg-red-500/10 transition-colors text-left cursor-pointer"
+            className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-red-300 hover:bg-red-500/10 transition-colors text-left cursor-pointer"
           >
-            <Trash2 className="w-4 h-4 text-red-400" />
-            <span>데이터 삭제 요청 (Data Deletion)</span>
+            <Trash2 className="w-4 h-4 text-red-400 shrink-0" />
+            <span className="flex flex-col leading-tight">
+              <span className="text-sm font-medium">데이터 삭제 요청</span>
+              <span className="text-xs font-mono text-red-300/75 mt-0.5">Delete Data</span>
+            </span>
           </button>
           <Link
             href="#faq-section"
             onClick={() => setMobileMenuOpen(false)}
-            className="block px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors"
+            className="flex flex-col px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition-colors leading-tight"
           >
-            FAQ (자주 묻는 질문)
+            <span className="text-sm font-medium">자주 묻는 질문</span>
+            <span className="text-xs font-mono text-slate-400 mt-0.5">FAQ</span>
           </Link>
         </div>
       )}

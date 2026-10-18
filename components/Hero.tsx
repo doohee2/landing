@@ -98,31 +98,43 @@ export function Hero({ onOpenDeleteModal }: HeroProps) {
         >
           <Link
             href="#apps-section"
-            className="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm shadow-lg shadow-indigo-600/30 hover:shadow-indigo-600/50 transition-all flex items-center gap-2"
+            className="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-600/30 hover:shadow-indigo-600/50 transition-all flex items-center gap-2.5"
           >
-            <span>{siteConfig.hero.ctaExplore}</span>
-            <ArrowDown className="w-4 h-4" />
+            <span className="flex flex-col items-start leading-tight text-left">
+              <span className="text-sm font-semibold">{siteConfig.hero.ctaExplore}</span>
+              <span className="text-[11px] font-mono text-indigo-100/80">{siteConfig.hero.ctaExploreEn}</span>
+            </span>
+            <ArrowDown className="w-4 h-4 shrink-0" />
           </Link>
           <Link
             href="/privacy"
-            className="px-5 py-3 rounded-xl bg-[#171f33] hover:bg-[#222a3d] text-slate-200 font-medium text-sm border border-white/10 transition-all flex items-center gap-2"
+            className="px-5 py-2.5 rounded-xl bg-[#171f33] hover:bg-[#222a3d] text-slate-200 border border-white/10 transition-all flex items-center gap-2.5"
           >
-            <ShieldCheck className="w-4 h-4 text-indigo-400" />
-            <span>{siteConfig.hero.ctaPrivacy}</span>
+            <ShieldCheck className="w-4 h-4 text-indigo-400 shrink-0" />
+            <span className="flex flex-col items-start leading-tight text-left">
+              <span className="text-sm font-medium">{siteConfig.hero.ctaPrivacy}</span>
+              <span className="text-[11px] font-mono text-slate-400">{siteConfig.hero.ctaPrivacyEn}</span>
+            </span>
           </Link>
           <Link
             href="/terms"
-            className="px-5 py-3 rounded-xl bg-[#171f33] hover:bg-[#222a3d] text-slate-200 font-medium text-sm border border-white/10 transition-all flex items-center gap-2"
+            className="px-5 py-2.5 rounded-xl bg-[#171f33] hover:bg-[#222a3d] text-slate-200 border border-white/10 transition-all flex items-center gap-2.5"
           >
-            <ScrollText className="w-4 h-4 text-indigo-400" />
-            <span>{siteConfig.hero.ctaTerms}</span>
+            <ScrollText className="w-4 h-4 text-indigo-400 shrink-0" />
+            <span className="flex flex-col items-start leading-tight text-left">
+              <span className="text-sm font-medium">{siteConfig.hero.ctaTerms}</span>
+              <span className="text-[11px] font-mono text-slate-400">{siteConfig.hero.ctaTermsEn}</span>
+            </span>
           </Link>
           <button
             onClick={onOpenDeleteModal}
-            className="px-5 py-3 rounded-xl bg-red-500/10 hover:bg-red-500/20 text-red-300 font-medium text-sm border border-red-500/25 transition-all flex items-center gap-2 cursor-pointer"
+            className="px-5 py-2.5 rounded-xl bg-red-500/10 hover:bg-red-500/20 text-red-300 border border-red-500/25 transition-all flex items-center gap-2.5 cursor-pointer"
           >
-            <Trash2 className="w-4 h-4 text-red-400" />
-            <span>{siteConfig.hero.ctaDelete}</span>
+            <Trash2 className="w-4 h-4 text-red-400 shrink-0" />
+            <span className="flex flex-col items-start leading-tight text-left">
+              <span className="text-sm font-medium">{siteConfig.hero.ctaDelete}</span>
+              <span className="text-[11px] font-mono text-red-300/75">{siteConfig.hero.ctaDeleteEn}</span>
+            </span>
           </button>
         </motion.div>
 
